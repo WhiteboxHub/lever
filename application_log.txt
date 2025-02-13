@@ -1,0 +1,99 @@
+2025-02-06 05:04:34,704 - INFO - ====== WebDriver manager ======
+2025-02-06 05:04:35,856 - INFO - Get LATEST chromedriver version for google-chrome
+2025-02-06 05:04:35,896 - INFO - Get LATEST chromedriver version for google-chrome
+2025-02-06 05:04:35,932 - INFO - Driver [C:\Users\hr\.wdm\drivers\chromedriver\win64\132.0.6834.159\chromedriver-win32/chromedriver.exe] found in cache
+2025-02-06 05:04:37,434 - INFO - Processing job link: https://jobs.lever.co/Federato/ca664080-ae5b-4cac-88f9-137d3d9f0c78/apply?source=LinkedIn
+2025-02-06 05:04:48,734 - INFO - Company: Federato | Position: Machine Learning Engineer
+2025-02-06 05:05:10,159 - ERROR - Error submitting application: Message: 
+Stacktrace:
+	GetHandleVerifier [0x00F674A3+25091]
+	(No symbol) [0x00EEDC04]
+	(No symbol) [0x00DCB373]
+	(No symbol) [0x00E0F4DC]
+	(No symbol) [0x00E0F65B]
+	(No symbol) [0x00E4D8E2]
+	(No symbol) [0x00E31F54]
+	(No symbol) [0x00E4B49E]
+	(No symbol) [0x00E31CA6]
+	(No symbol) [0x00E031D5]
+	(No symbol) [0x00E0435D]
+	GetHandleVerifier [0x012607C3+3142947]
+	GetHandleVerifier [0x01271A2B+3213195]
+	GetHandleVerifier [0x0126C412+3191154]
+	GetHandleVerifier [0x01008720+685184]
+	(No symbol) [0x00EF6E1D]
+	(No symbol) [0x00EF3E18]
+	(No symbol) [0x00EF3FB6]
+	(No symbol) [0x00EE66F0]
+	BaseThreadInitThunk [0x76DA7BA9+25]
+	RtlInitializeExceptionChain [0x77DDC0CB+107]
+	RtlClearBits [0x77DDC04F+191]
+
+2025-02-06 05:05:10,163 - INFO - Processing job link: https://jobs.lever.co/Federato/ca664080-ae5b-4cac-88f9-137d3d9f0c78/apply?source=LinkedIn
+2025-02-06 05:05:15,686 - INFO - Company: Federato | Position: Machine Learning Engineer
+2025-02-06 05:05:36,119 - ERROR - Error submitting application: Message: 
+Stacktrace:
+	GetHandleVerifier [0x00F674A3+25091]
+	(No symbol) [0x00EEDC04]
+	(No symbol) [0x00DCB373]
+	(No symbol) [0x00E0F4DC]
+	(No symbol) [0x00E0F65B]
+	(No symbol) [0x00E4D8E2]
+	(No symbol) [0x00E31F54]
+	(No symbol) [0x00E4B49E]
+	(No symbol) [0x00E31CA6]
+	(No symbol) [0x00E031D5]
+	(No symbol) [0x00E0435D]
+	GetHandleVerifier [0x012607C3+3142947]
+	GetHandleVerifier [0x01271A2B+3213195]
+	GetHandleVerifier [0x0126C412+3191154]
+	GetHandleVerifier [0x01008720+685184]
+	(No symbol) [0x00EF6E1D]
+	(No symbol) [0x00EF3E18]
+	(No symbol) [0x00EF3FB6]
+	(No symbol) [0x00EE66F0]
+	BaseThreadInitThunk [0x76DA7BA9+25]
+	RtlInitializeExceptionChain [0x77DDC0CB+107]
+	RtlClearBits [0x77DDC04F+191]
+
+2025-02-06 05:05:36,121 - INFO - Processing job link: https://jobs.lever.co/Federato/ca664080-ae5b-4cac-88f9-137d3d9f0c78/apply?source=LinkedIn
+2025-02-06 05:05:40,796 - INFO - Company: Federato | Position: Machine Learning Engineer
+2025-02-06 05:05:51,626 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None)': /session/ad489d134333cd15264b2a7fd462e47e
+2025-02-06 05:10:05,594 - INFO - ====== WebDriver manager ======
+2025-02-06 05:10:06,729 - INFO - Get LATEST chromedriver version for google-chrome
+2025-02-06 05:10:06,771 - INFO - Get LATEST chromedriver version for google-chrome
+2025-02-06 05:10:06,809 - INFO - Driver [C:\Users\hr\.wdm\drivers\chromedriver\win64\132.0.6834.159\chromedriver-win32/chromedriver.exe] found in cache
+2025-02-06 05:10:08,360 - INFO - Processing: https://jobs.lever.co/Federato/ca664080-ae5b-4cac-88f9-137d3d9f0c78/apply?source=LinkedIn
+2025-02-06 05:11:27,667 - ERROR - Error during application process: Message: move target out of bounds
+  (Session info: chrome=132.0.6834.160)
+Stacktrace:
+	GetHandleVerifier [0x00F674A3+25091]
+	(No symbol) [0x00EEDC04]
+	(No symbol) [0x00DCB1E9]
+	(No symbol) [0x00E52824]
+	(No symbol) [0x00E31F0C]
+	(No symbol) [0x00E4B49E]
+	(No symbol) [0x00E31CA6]
+	(No symbol) [0x00E031D5]
+	(No symbol) [0x00E0435D]
+	GetHandleVerifier [0x012607C3+3142947]
+	GetHandleVerifier [0x01271A2B+3213195]
+	GetHandleVerifier [0x0126C412+3191154]
+	GetHandleVerifier [0x01008720+685184]
+	(No symbol) [0x00EF6E1D]
+	(No symbol) [0x00EF3E18]
+	(No symbol) [0x00EF3FB6]
+	(No symbol) [0x00EE66F0]
+	BaseThreadInitThunk [0x76DA7BA9+25]
+	RtlInitializeExceptionChain [0x77DDC0CB+107]
+	RtlClearBits [0x77DDC04F+191]
+
+2025-02-06 05:11:27,675 - ERROR - Application failed
+2025-02-06 05:15:46,554 - INFO - ====== WebDriver manager ======
+2025-02-06 05:15:47,688 - INFO - Get LATEST chromedriver version for google-chrome
+2025-02-06 05:15:47,719 - INFO - Get LATEST chromedriver version for google-chrome
+2025-02-06 05:15:47,750 - INFO - Driver [C:\Users\hr\.wdm\drivers\chromedriver\win64\132.0.6834.159\chromedriver-win32/chromedriver.exe] found in cache
+2025-02-06 05:15:49,234 - INFO - 
+Processing application 1/1
+2025-02-06 05:15:49,235 - INFO - Link: https://jobs.lever.co/Federato/ca664080-ae5b-4cac-88f9-137d3d9f0c78/apply?source=LinkedIn
+2025-02-06 05:22:05,008 - INFO - Application process completed
