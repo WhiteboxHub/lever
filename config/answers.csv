@@ -1,4 +1,6 @@
 Question,Answer
+"gender","Male"
+"current_location","India"
 "Are you open to a hybrid schedule, based in the SF Bay Area?","Yes"
 "Are you authorized to work in the United States?","No"
 "Describe your experience with Python and which libraries you use during your day to day","I have 6 months of experience with Python. I frequently use libraries like Pandas, NumPy, and Matplotlib for data analysis and visualization."
@@ -11,9 +13,7 @@ Question,Answer
 "By submitting your application you agree to the handling of your personal data as described in the applicant privacy notice: https://woven.toyota/en/applicant-privacy-notice*","I acknowledge"
 "Do you consider yourself a member of the Lesbian, Gay, Bisexual and/or Transgender, Queer and Questioning (LGBTQ) community?","No"
 "Do you identify as a Protected Veteran defined as one of the following: Disabled veteran; Recently separated veteran; Active wartime or campaign badge veteran; Armed Forces service medal veteran?","I decline to answer"
-"Woven by Toyota conducts a thorough pre-employment background check as a condition of employment. This check may include verification of your education, employment history, criminal history, and any other relevant information. If you accept an offer of employment, you consent to this background check and acknowledge that any employment offer is contingent upon satisfactory results","I acknowledge"
-"Please review and acknowledge you read and understood the non-disclosure agreement at the following link: https://woven.toyota/en/careers/nda/","I acknowledge"
-"Woven by Toyota conducts a thorough pre-employment background check as a condition of employment. This check may include verification of your education, employment history, criminal history, and any other relevant information. If you accept an offer of employment, you consent to this background check and acknowledge that any employment offer is contingent upon satisfactory results.","I acknowledge"
 "This role requires candidates to be in our Cupertino offices 50% of the time. Are you able to meet that requirement?","No"
 "Are you currently eligible to work in the USA?","Yes"
 "Will you now, or in the future, require sponsorship (i.e. H-1B visa, etc.) to legally work in the U.S.?","Yes"
+"Are you located in the U.S.?","Yes"

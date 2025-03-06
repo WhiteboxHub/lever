@@ -1,0 +1,479 @@
+https://jobs.lever.co/gridmatic/91df21b7-9d76-47a1-a88e-35801f801d98?source=LinkedIn,2025-03-06 21:02:36,"Message: 
+Stacktrace:
+	GetHandleVerifier [0x00C4CED3+25523]
+	(No symbol) [0x00BD23B4]
+	(No symbol) [0x00AA06E3]
+	(No symbol) [0x00AE8B79]
+	(No symbol) [0x00AE8ECB]
+	(No symbol) [0x00B31B32]
+	(No symbol) [0x00B0D844]
+	(No symbol) [0x00B2F273]
+	(No symbol) [0x00B0D5F6]
+	(No symbol) [0x00ADC55F]
+	(No symbol) [0x00ADD8A4]
+	GetHandleVerifier [0x00F52713+3193843]
+	GetHandleVerifier [0x00F669E9+3276489]
+	GetHandleVerifier [0x00F60F0C+3253228]
+	GetHandleVerifier [0x00CEB0C0+673184]
+	(No symbol) [0x00BDB43D]
+	(No symbol) [0x00BD8568]
+	(No symbol) [0x00BD8709]
+	(No symbol) [0x00BCAE90]
+	BaseThreadInitThunk [0x75ED5D49+25]
+	RtlInitializeExceptionChain [0x7748CDEB+107]
+	RtlGetAppContainerNamedObjectPath [0x7748CD71+561]
+"
+https://jobs.lever.co/woven-by-toyota/0da237aa-d218-4a5e-9bb1-3e2157c5961a/apply?source=LinkedInhttps://jobs.lever.co/concurrency/b6883eea-f36f-4082-b184-58395b433e0e/apply?source=LinkedIn,2025-03-06 21:03:33,"Message: 
+"
+https://jobs.lever.co/menlovc/2a6345ea-3b7a-4371-be09-4ce647036233,2025-03-06 21:03:54,"Message: 
+Stacktrace:
+	GetHandleVerifier [0x00C4CED3+25523]
+	(No symbol) [0x00BD23B4]
+	(No symbol) [0x00AA06E3]
+	(No symbol) [0x00AE8B79]
+	(No symbol) [0x00AE8ECB]
+	(No symbol) [0x00B31B32]
+	(No symbol) [0x00B0D844]
+	(No symbol) [0x00B2F273]
+	(No symbol) [0x00B0D5F6]
+	(No symbol) [0x00ADC55F]
+	(No symbol) [0x00ADD8A4]
+	GetHandleVerifier [0x00F52713+3193843]
+	GetHandleVerifier [0x00F669E9+3276489]
+	GetHandleVerifier [0x00F60F0C+3253228]
+	GetHandleVerifier [0x00CEB0C0+673184]
+	(No symbol) [0x00BDB43D]
+	(No symbol) [0x00BD8568]
+	(No symbol) [0x00BD8709]
+	(No symbol) [0x00BCAE90]
+	BaseThreadInitThunk [0x75ED5D49+25]
+	RtlInitializeExceptionChain [0x7748CDEB+107]
+	RtlGetAppContainerNamedObjectPath [0x7748CD71+561]
+"
+https://jobs.lever.co/woven-by-toyota/0da237aa-d218-4a5e-9bb1-3e2157c5961a/apply?source=LinkedIn,2025-03-06 21:04:22,"Message: 
+"
+https://jobs.lever.co/woven-by-toyota/0da237aa-d218-4a5e-9bb1-3e2157c5961a/apply?source=LinkedIn,2025-03-06 21:36:24,"Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=134.0.6998.36)
+Stacktrace:
+	GetHandleVerifier [0x00E0CED3+25523]
+	(No symbol) [0x00D923B4]
+	(No symbol) [0x00C606E3]
+	(No symbol) [0x00C3F84E]
+	(No symbol) [0x00CD459E]
+	(No symbol) [0x00CEEB89]
+	(No symbol) [0x00CCD5F6]
+	(No symbol) [0x00C9C55F]
+	(No symbol) [0x00C9D8A4]
+	GetHandleVerifier [0x01112713+3193843]
+	GetHandleVerifier [0x011269E9+3276489]
+	GetHandleVerifier [0x01120F0C+3253228]
+	GetHandleVerifier [0x00EAB0C0+673184]
+	(No symbol) [0x00D9B43D]
+	(No symbol) [0x00D98568]
+	(No symbol) [0x00D98709]
+	(No symbol) [0x00D8AE90]
+	BaseThreadInitThunk [0x75ED5D49+25]
+	RtlInitializeExceptionChain [0x7748CDEB+107]
+	RtlGetAppContainerNamedObjectPath [0x7748CD71+561]
+"
+https://jobs.lever.co/concurrency/b6883eea-f36f-4082-b184-58395b433e0e/apply?source=LinkedIn,2025-03-06 21:36:24,"Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=134.0.6998.36)
+Stacktrace:
+	GetHandleVerifier [0x00E0CED3+25523]
+	(No symbol) [0x00D923B4]
+	(No symbol) [0x00C606E3]
+	(No symbol) [0x00C3F84E]
+	(No symbol) [0x00CD459E]
+	(No symbol) [0x00CEEB89]
+	(No symbol) [0x00CCD5F6]
+	(No symbol) [0x00C9C55F]
+	(No symbol) [0x00C9D8A4]
+	GetHandleVerifier [0x01112713+3193843]
+	GetHandleVerifier [0x011269E9+3276489]
+	GetHandleVerifier [0x01120F0C+3253228]
+	GetHandleVerifier [0x00EAB0C0+673184]
+	(No symbol) [0x00D9B43D]
+	(No symbol) [0x00D98568]
+	(No symbol) [0x00D98709]
+	(No symbol) [0x00D8AE90]
+	BaseThreadInitThunk [0x75ED5D49+25]
+	RtlInitializeExceptionChain [0x7748CDEB+107]
+	RtlGetAppContainerNamedObjectPath [0x7748CD71+561]
+"
+https://jobs.lever.co/Federato/7ca318a4-1da1-4f79-ad80-7e65b51aa11b/apply?source=LinkedIn,2025-03-06 21:36:24,"Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=134.0.6998.36)
+Stacktrace:
+	GetHandleVerifier [0x00E0CED3+25523]
+	(No symbol) [0x00D923B4]
+	(No symbol) [0x00C606E3]
+	(No symbol) [0x00C3F84E]
+	(No symbol) [0x00CD459E]
+	(No symbol) [0x00CEEB89]
+	(No symbol) [0x00CCD5F6]
+	(No symbol) [0x00C9C55F]
+	(No symbol) [0x00C9D8A4]
+	GetHandleVerifier [0x01112713+3193843]
+	GetHandleVerifier [0x011269E9+3276489]
+	GetHandleVerifier [0x01120F0C+3253228]
+	GetHandleVerifier [0x00EAB0C0+673184]
+	(No symbol) [0x00D9B43D]
+	(No symbol) [0x00D98568]
+	(No symbol) [0x00D98709]
+	(No symbol) [0x00D8AE90]
+	BaseThreadInitThunk [0x75ED5D49+25]
+	RtlInitializeExceptionChain [0x7748CDEB+107]
+	RtlGetAppContainerNamedObjectPath [0x7748CD71+561]
+"
+https://jobs.lever.co/zoox/f61979b0-eb89-43ad-b11b-544b2d46baa8/apply?source=LinkedIn,2025-03-06 21:36:24,"Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=134.0.6998.36)
+Stacktrace:
+	GetHandleVerifier [0x00E0CED3+25523]
+	(No symbol) [0x00D923B4]
+	(No symbol) [0x00C606E3]
+	(No symbol) [0x00C3F84E]
+	(No symbol) [0x00CD459E]
+	(No symbol) [0x00CEEB89]
+	(No symbol) [0x00CCD5F6]
+	(No symbol) [0x00C9C55F]
+	(No symbol) [0x00C9D8A4]
+	GetHandleVerifier [0x01112713+3193843]
+	GetHandleVerifier [0x011269E9+3276489]
+	GetHandleVerifier [0x01120F0C+3253228]
+	GetHandleVerifier [0x00EAB0C0+673184]
+	(No symbol) [0x00D9B43D]
+	(No symbol) [0x00D98568]
+	(No symbol) [0x00D98709]
+	(No symbol) [0x00D8AE90]
+	BaseThreadInitThunk [0x75ED5D49+25]
+	RtlInitializeExceptionChain [0x7748CDEB+107]
+	RtlGetAppContainerNamedObjectPath [0x7748CD71+561]
+"
+https://jobs.lever.co/AIFund/9f27f5ff-7c4b-4eff-9a04-2d9d323e13af,2025-03-06 21:36:24,"Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=134.0.6998.36)
+Stacktrace:
+	GetHandleVerifier [0x00E0CED3+25523]
+	(No symbol) [0x00D923B4]
+	(No symbol) [0x00C606E3]
+	(No symbol) [0x00C3F84E]
+	(No symbol) [0x00CD459E]
+	(No symbol) [0x00CEEB89]
+	(No symbol) [0x00CCD5F6]
+	(No symbol) [0x00C9C55F]
+	(No symbol) [0x00C9D8A4]
+	GetHandleVerifier [0x01112713+3193843]
+	GetHandleVerifier [0x011269E9+3276489]
+	GetHandleVerifier [0x01120F0C+3253228]
+	GetHandleVerifier [0x00EAB0C0+673184]
+	(No symbol) [0x00D9B43D]
+	(No symbol) [0x00D98568]
+	(No symbol) [0x00D98709]
+	(No symbol) [0x00D8AE90]
+	BaseThreadInitThunk [0x75ED5D49+25]
+	RtlInitializeExceptionChain [0x7748CDEB+107]
+	RtlGetAppContainerNamedObjectPath [0x7748CD71+561]
+"
+https://jobs.lever.co/Federato/ca664080-ae5b-4cac-88f9-137d3d9f0c78/apply?source=LinkedIn,2025-03-06 21:36:24,"Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=134.0.6998.36)
+Stacktrace:
+	GetHandleVerifier [0x00E0CED3+25523]
+	(No symbol) [0x00D923B4]
+	(No symbol) [0x00C606E3]
+	(No symbol) [0x00C3F84E]
+	(No symbol) [0x00CD459E]
+	(No symbol) [0x00CEEB89]
+	(No symbol) [0x00CCD5F6]
+	(No symbol) [0x00C9C55F]
+	(No symbol) [0x00C9D8A4]
+	GetHandleVerifier [0x01112713+3193843]
+	GetHandleVerifier [0x011269E9+3276489]
+	GetHandleVerifier [0x01120F0C+3253228]
+	GetHandleVerifier [0x00EAB0C0+673184]
+	(No symbol) [0x00D9B43D]
+	(No symbol) [0x00D98568]
+	(No symbol) [0x00D98709]
+	(No symbol) [0x00D8AE90]
+	BaseThreadInitThunk [0x75ED5D49+25]
+	RtlInitializeExceptionChain [0x7748CDEB+107]
+	RtlGetAppContainerNamedObjectPath [0x7748CD71+561]
+"
+https://jobs.lever.co/AIFund/9f27f5ff-7c4b-4eff-9a04-2d9d323e13af,2025-03-06 21:36:24,"Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=134.0.6998.36)
+Stacktrace:
+	GetHandleVerifier [0x00E0CED3+25523]
+	(No symbol) [0x00D923B4]
+	(No symbol) [0x00C606E3]
+	(No symbol) [0x00C3F84E]
+	(No symbol) [0x00CD459E]
+	(No symbol) [0x00CEEB89]
+	(No symbol) [0x00CCD5F6]
+	(No symbol) [0x00C9C55F]
+	(No symbol) [0x00C9D8A4]
+	GetHandleVerifier [0x01112713+3193843]
+	GetHandleVerifier [0x011269E9+3276489]
+	GetHandleVerifier [0x01120F0C+3253228]
+	GetHandleVerifier [0x00EAB0C0+673184]
+	(No symbol) [0x00D9B43D]
+	(No symbol) [0x00D98568]
+	(No symbol) [0x00D98709]
+	(No symbol) [0x00D8AE90]
+	BaseThreadInitThunk [0x75ED5D49+25]
+	RtlInitializeExceptionChain [0x7748CDEB+107]
+	RtlGetAppContainerNamedObjectPath [0x7748CD71+561]
+"
+https://jobs.lever.co/wasabi/04979560-92bd-4213-9edf-1ccd1877c9e3/apply?source=LinkedIn,2025-03-06 21:36:24,"Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=134.0.6998.36)
+Stacktrace:
+	GetHandleVerifier [0x00E0CED3+25523]
+	(No symbol) [0x00D923B4]
+	(No symbol) [0x00C606E3]
+	(No symbol) [0x00C3F84E]
+	(No symbol) [0x00CD459E]
+	(No symbol) [0x00CEEB89]
+	(No symbol) [0x00CCD5F6]
+	(No symbol) [0x00C9C55F]
+	(No symbol) [0x00C9D8A4]
+	GetHandleVerifier [0x01112713+3193843]
+	GetHandleVerifier [0x011269E9+3276489]
+	GetHandleVerifier [0x01120F0C+3253228]
+	GetHandleVerifier [0x00EAB0C0+673184]
+	(No symbol) [0x00D9B43D]
+	(No symbol) [0x00D98568]
+	(No symbol) [0x00D98709]
+	(No symbol) [0x00D8AE90]
+	BaseThreadInitThunk [0x75ED5D49+25]
+	RtlInitializeExceptionChain [0x7748CDEB+107]
+	RtlGetAppContainerNamedObjectPath [0x7748CD71+561]
+"
+https://jobs.lever.co/Federato/ca664080-ae5b-4cac-88f9-137d3d9f0c78/apply?source=LinkedIn,2025-03-06 21:36:24,"Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=134.0.6998.36)
+Stacktrace:
+	GetHandleVerifier [0x00E0CED3+25523]
+	(No symbol) [0x00D923B4]
+	(No symbol) [0x00C606E3]
+	(No symbol) [0x00C3F84E]
+	(No symbol) [0x00CD459E]
+	(No symbol) [0x00CEEB89]
+	(No symbol) [0x00CCD5F6]
+	(No symbol) [0x00C9C55F]
+	(No symbol) [0x00C9D8A4]
+	GetHandleVerifier [0x01112713+3193843]
+	GetHandleVerifier [0x011269E9+3276489]
+	GetHandleVerifier [0x01120F0C+3253228]
+	GetHandleVerifier [0x00EAB0C0+673184]
+	(No symbol) [0x00D9B43D]
+	(No symbol) [0x00D98568]
+	(No symbol) [0x00D98709]
+	(No symbol) [0x00D8AE90]
+	BaseThreadInitThunk [0x75ED5D49+25]
+	RtlInitializeExceptionChain [0x7748CDEB+107]
+	RtlGetAppContainerNamedObjectPath [0x7748CD71+561]
+"
+https://jobs.lever.co/AIFund/9f27f5ff-7c4b-4eff-9a04-2d9d323e13af,2025-03-06 21:36:24,"Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=134.0.6998.36)
+Stacktrace:
+	GetHandleVerifier [0x00E0CED3+25523]
+	(No symbol) [0x00D923B4]
+	(No symbol) [0x00C606E3]
+	(No symbol) [0x00C3F84E]
+	(No symbol) [0x00CD459E]
+	(No symbol) [0x00CEEB89]
+	(No symbol) [0x00CCD5F6]
+	(No symbol) [0x00C9C55F]
+	(No symbol) [0x00C9D8A4]
+	GetHandleVerifier [0x01112713+3193843]
+	GetHandleVerifier [0x011269E9+3276489]
+	GetHandleVerifier [0x01120F0C+3253228]
+	GetHandleVerifier [0x00EAB0C0+673184]
+	(No symbol) [0x00D9B43D]
+	(No symbol) [0x00D98568]
+	(No symbol) [0x00D98709]
+	(No symbol) [0x00D8AE90]
+	BaseThreadInitThunk [0x75ED5D49+25]
+	RtlInitializeExceptionChain [0x7748CDEB+107]
+	RtlGetAppContainerNamedObjectPath [0x7748CD71+561]
+"
+https://jobs.lever.co/wasabi/04979560-92bd-4213-9edf-1ccd1877c9e3/apply?source=LinkedIn,2025-03-06 21:36:24,"Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=134.0.6998.36)
+Stacktrace:
+	GetHandleVerifier [0x00E0CED3+25523]
+	(No symbol) [0x00D923B4]
+	(No symbol) [0x00C606E3]
+	(No symbol) [0x00C3F84E]
+	(No symbol) [0x00CD459E]
+	(No symbol) [0x00CEEB89]
+	(No symbol) [0x00CCD5F6]
+	(No symbol) [0x00C9C55F]
+	(No symbol) [0x00C9D8A4]
+	GetHandleVerifier [0x01112713+3193843]
+	GetHandleVerifier [0x011269E9+3276489]
+	GetHandleVerifier [0x01120F0C+3253228]
+	GetHandleVerifier [0x00EAB0C0+673184]
+	(No symbol) [0x00D9B43D]
+	(No symbol) [0x00D98568]
+	(No symbol) [0x00D98709]
+	(No symbol) [0x00D8AE90]
+	BaseThreadInitThunk [0x75ED5D49+25]
+	RtlInitializeExceptionChain [0x7748CDEB+107]
+	RtlGetAppContainerNamedObjectPath [0x7748CD71+561]
+"
+https://jobs.lever.co/Federato/ca664080-ae5b-4cac-88f9-137d3d9f0c78/apply?source=LinkedIn,2025-03-06 21:36:24,"Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=134.0.6998.36)
+Stacktrace:
+	GetHandleVerifier [0x00E0CED3+25523]
+	(No symbol) [0x00D923B4]
+	(No symbol) [0x00C606E3]
+	(No symbol) [0x00C3F84E]
+	(No symbol) [0x00CD459E]
+	(No symbol) [0x00CEEB89]
+	(No symbol) [0x00CCD5F6]
+	(No symbol) [0x00C9C55F]
+	(No symbol) [0x00C9D8A4]
+	GetHandleVerifier [0x01112713+3193843]
+	GetHandleVerifier [0x011269E9+3276489]
+	GetHandleVerifier [0x01120F0C+3253228]
+	GetHandleVerifier [0x00EAB0C0+673184]
+	(No symbol) [0x00D9B43D]
+	(No symbol) [0x00D98568]
+	(No symbol) [0x00D98709]
+	(No symbol) [0x00D8AE90]
+	BaseThreadInitThunk [0x75ED5D49+25]
+	RtlInitializeExceptionChain [0x7748CDEB+107]
+	RtlGetAppContainerNamedObjectPath [0x7748CD71+561]
+"
+https://jobs.lever.co/AIFund/9f27f5ff-7c4b-4eff-9a04-2d9d323e13af,2025-03-06 21:36:24,"Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=134.0.6998.36)
+Stacktrace:
+	GetHandleVerifier [0x00E0CED3+25523]
+	(No symbol) [0x00D923B4]
+	(No symbol) [0x00C606E3]
+	(No symbol) [0x00C3F84E]
+	(No symbol) [0x00CD459E]
+	(No symbol) [0x00CEEB89]
+	(No symbol) [0x00CCD5F6]
+	(No symbol) [0x00C9C55F]
+	(No symbol) [0x00C9D8A4]
+	GetHandleVerifier [0x01112713+3193843]
+	GetHandleVerifier [0x011269E9+3276489]
+	GetHandleVerifier [0x01120F0C+3253228]
+	GetHandleVerifier [0x00EAB0C0+673184]
+	(No symbol) [0x00D9B43D]
+	(No symbol) [0x00D98568]
+	(No symbol) [0x00D98709]
+	(No symbol) [0x00D8AE90]
+	BaseThreadInitThunk [0x75ED5D49+25]
+	RtlInitializeExceptionChain [0x7748CDEB+107]
+	RtlGetAppContainerNamedObjectPath [0x7748CD71+561]
+"
+https://jobs.lever.co/AIFund/26360807-21a4-4e9e-8996-8cabd3cc69cd?source=LinkedIn,2025-03-06 21:36:24,"Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=134.0.6998.36)
+Stacktrace:
+	GetHandleVerifier [0x00E0CED3+25523]
+	(No symbol) [0x00D923B4]
+	(No symbol) [0x00C606E3]
+	(No symbol) [0x00C3F84E]
+	(No symbol) [0x00CD459E]
+	(No symbol) [0x00CEEB89]
+	(No symbol) [0x00CCD5F6]
+	(No symbol) [0x00C9C55F]
+	(No symbol) [0x00C9D8A4]
+	GetHandleVerifier [0x01112713+3193843]
+	GetHandleVerifier [0x011269E9+3276489]
+	GetHandleVerifier [0x01120F0C+3253228]
+	GetHandleVerifier [0x00EAB0C0+673184]
+	(No symbol) [0x00D9B43D]
+	(No symbol) [0x00D98568]
+	(No symbol) [0x00D98709]
+	(No symbol) [0x00D8AE90]
+	BaseThreadInitThunk [0x75ED5D49+25]
+	RtlInitializeExceptionChain [0x7748CDEB+107]
+	RtlGetAppContainerNamedObjectPath [0x7748CD71+561]
+"
+https://jobs.lever.co/concurrency/b6883eea-f36f-4082-b184-58395b433e0e/apply?source=LinkedIn,2025-03-06 21:36:24,"Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=134.0.6998.36)
+Stacktrace:
+	GetHandleVerifier [0x00E0CED3+25523]
+	(No symbol) [0x00D923B4]
+	(No symbol) [0x00C606E3]
+	(No symbol) [0x00C3F84E]
+	(No symbol) [0x00CD459E]
+	(No symbol) [0x00CEEB89]
+	(No symbol) [0x00CCD5F6]
+	(No symbol) [0x00C9C55F]
+	(No symbol) [0x00C9D8A4]
+	GetHandleVerifier [0x01112713+3193843]
+	GetHandleVerifier [0x011269E9+3276489]
+	GetHandleVerifier [0x01120F0C+3253228]
+	GetHandleVerifier [0x00EAB0C0+673184]
+	(No symbol) [0x00D9B43D]
+	(No symbol) [0x00D98568]
+	(No symbol) [0x00D98709]
+	(No symbol) [0x00D8AE90]
+	BaseThreadInitThunk [0x75ED5D49+25]
+	RtlInitializeExceptionChain [0x7748CDEB+107]
+	RtlGetAppContainerNamedObjectPath [0x7748CD71+561]
+"
+https://jobs.lever.co/Federato/7ca318a4-1da1-4f79-ad80-7e65b51aa11b/apply?source=LinkedIn,2025-03-06 21:36:24,"Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=134.0.6998.36)
+Stacktrace:
+	GetHandleVerifier [0x00E0CED3+25523]
+	(No symbol) [0x00D923B4]
+	(No symbol) [0x00C606E3]
+	(No symbol) [0x00C3F84E]
+	(No symbol) [0x00CD459E]
+	(No symbol) [0x00CEEB89]
+	(No symbol) [0x00CCD5F6]
+	(No symbol) [0x00C9C55F]
+	(No symbol) [0x00C9D8A4]
+	GetHandleVerifier [0x01112713+3193843]
+	GetHandleVerifier [0x011269E9+3276489]
+	GetHandleVerifier [0x01120F0C+3253228]
+	GetHandleVerifier [0x00EAB0C0+673184]
+	(No symbol) [0x00D9B43D]
+	(No symbol) [0x00D98568]
+	(No symbol) [0x00D98709]
+	(No symbol) [0x00D8AE90]
+	BaseThreadInitThunk [0x75ED5D49+25]
+	RtlInitializeExceptionChain [0x7748CDEB+107]
+	RtlGetAppContainerNamedObjectPath [0x7748CD71+561]
+"
+https://jobs.lever.co/goodleap/10788466-0e2d-4e8f-936c-f86e8dc8f9db/apply?source=LinkedIn,2025-03-06 21:36:24,"Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=134.0.6998.36)
+Stacktrace:
+	GetHandleVerifier [0x00E0CED3+25523]
+	(No symbol) [0x00D923B4]
+	(No symbol) [0x00C606E3]
+	(No symbol) [0x00C3F84E]
+	(No symbol) [0x00CD459E]
+	(No symbol) [0x00CEEB89]
+	(No symbol) [0x00CCD5F6]
+	(No symbol) [0x00C9C55F]
+	(No symbol) [0x00C9D8A4]
+	GetHandleVerifier [0x01112713+3193843]
+	GetHandleVerifier [0x011269E9+3276489]
+	GetHandleVerifier [0x01120F0C+3253228]
+	GetHandleVerifier [0x00EAB0C0+673184]
+	(No symbol) [0x00D9B43D]
+	(No symbol) [0x00D98568]
+	(No symbol) [0x00D98709]
+	(No symbol) [0x00D8AE90]
+	BaseThreadInitThunk [0x75ED5D49+25]
+	RtlInitializeExceptionChain [0x7748CDEB+107]
+	RtlGetAppContainerNamedObjectPath [0x7748CD71+561]
+"
