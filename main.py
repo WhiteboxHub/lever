@@ -1,3 +1,4 @@
+
 import csv
 import os
 import time
@@ -7,8 +8,6 @@ from selenium.webdriver.support.ui import Select
 import yaml
 import pandas as pd
 from fuzzywuzzy import fuzz
-import smtplib
-from email.mime.text import MIMEText
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -18,7 +17,8 @@ from selenium.common.exceptions import TimeoutException, NoSuchElementException
 
 lever_base_url = "https://jobs.lever.co"
 
-logging.basicConfig(level=logging.INFO)
+# Set up logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def load_config(file_location):
     with open(file_location, 'r') as stream:
@@ -33,6 +33,10 @@ def load_config(file_location):
     assert parameters.get("linkedin"), "LinkedIn URL is missing in YAML file."
     assert parameters.get("resume_path"), "Resume path is missing in YAML file."
 
+    resume_path = os.path.abspath(parameters["resume_path"])
+    if not os.path.isfile(resume_path):
+        logging.error(f"Resume file not found at: {resume_path}")
+        raise FileNotFoundError(f"Resume file not found at: {resume_path}")
     credentials = {
         "full_name": parameters["full_name"],
         "email": parameters["email"],
@@ -51,56 +55,22 @@ def load_config(file_location):
 
     credentials.update(optional_fields)
     return credentials
+
 credentials = load_config("config/credentials.yaml")
-
-EMAIL_SENDER = "your_email@gmail.com"
-EMAIL_PASSWORD = "your_app_password"  
-EMAIL_RECEIVER = "receiver_email@gmail.com"
-
-def send_email(job_link):
-    """Send email notification after successful submission."""
-    subject = "Job Application Submitted Successfully"
-    body = f"Your application for {job_link} has been submitted successfully on {time.ctime()}."
-    msg = MIMEText(body)
-    msg["Subject"] = subject
-    msg["From"] = EMAIL_SENDER
-    msg["To"] = EMAIL_RECEIVER
-
-    try:
-        with smtplib.SMTP("smtp.gmail.com", 587) as server:
-            server.starttls()
-            server.login(EMAIL_SENDER, EMAIL_PASSWORD)
-            server.sendmail(EMAIL_SENDER, EMAIL_RECEIVER, msg.as_string())
-        print(f"Email sent: Application for {job_link} submitted successfully")
-    except Exception as e:
-        print(f"Failed to send email: {str(e)}")
-def send_email(job_link):
-    """Send email notification after successful submission."""
-    subject = "Job Application Submitted Successfully"
-    body = f"Your application for {job_link} has been submitted successfully on {time.ctime()}."
-    msg = MIMEText(body)
-    msg["Subject"] = subject
-    msg["From"] = EMAIL_SENDER
-    msg["To"] = EMAIL_RECEIVER
-
-    try:
-        with smtplib.SMTP("smtp.gmail.com", 587) as server:
-            server.starttls()
-            server.login(EMAIL_SENDER, EMAIL_PASSWORD)
-            server.sendmail(EMAIL_SENDER, EMAIL_RECEIVER, msg.as_string())
-        print(f"Email sent: Application for {job_link} submitted successfully")
-    except Exception as e:
-        print(f"Failed to send email: {str(e)}")
 
 answers = {}
 try:
-    with open("config/answers.csv", mode="r",encoding='utf-8') as file:
+    with open("config/answers.csv", mode="r", encoding='utf-8') as file:
         reader = csv.DictReader(file)
         for row in reader:
             question = row["Question"].strip().lower()
-            answers[question] = row["Answer"].strip()
+            answers[question] = row["Answer"]
 except FileNotFoundError:
     logging.error("Error: 'answers.csv' file not found.")
+    exit()
+
+if not answers:
+    logging.error("No answers loaded from 'answers.csv'. Please check the file.")
     exit()
 
 chrome_options = Options()
@@ -113,13 +83,15 @@ job_links = []
 if os.path.exists(job_links_file):
     try:
         job_links_df = pd.read_csv(job_links_file)
-        if not all(col in job_links_df.columns for col in ["platform", "company", "jobid"]):
+        required_columns = ["platform", "company", "platform_job_id", "platform_link"]
+        if not all(col in job_links_df.columns for col in required_columns):
             logging.error("Missing required columns in CSV file.")
             exit()
 
+        # Filter for Lever jobs and construct URLs
         for row in job_links_df.itertuples(index=False):
             if str(row.platform).lower() == "lever":
-                job_links.append(f"{lever_base_url}/{row.company}/{row.jobid}")
+                job_links.append(f"{lever_base_url}/{row.company}/{row.platform_job_id}")
     except pd.errors.ParserError as e:
         logging.error(f"Error parsing CSV file: {e}")
         exit()
@@ -135,7 +107,7 @@ FIELD_SELECTORS = {
     "full_name": ["input[name='name']", "input[id='name']"],
     "email": ["input[type='email']", "input[name*='email']"],
     "phone": ["input[type='tel']", "input[name*='phone']"],
-    "linkedin": ["input[name*='linkedin']", "input[id*='linkedin']"],
+    "linkedin": ["input[name='urls[LinkedIn]']", "input[id*='linkedin']"],
     "resume": ["input[type='file']", "input[name*='resume']"],
     "current_location": ["input[name='location']"],
     "current_company": ["input[name='org']"],
@@ -161,12 +133,12 @@ def find_input_field(driver, selectors):
 def open_job_and_click_apply(driver, job_link):
     """Opens job link, checks for 404 errors, clicks 'Apply' button if found, else skips."""
     try:
-        print(f"\nOpening job: {job_link}")
+        logging.info(f"Opening job: {job_link}")
         driver.get(job_link)
         time.sleep(2)
 
         if "404" in driver.page_source or "Not Found" in driver.page_source:
-            print("⚠ Page not found (404). Skipping this job link.")
+            logging.warning("Page not found (404). Skipping this job link.")
             return False
 
         apply_selectors = [
@@ -182,135 +154,217 @@ def open_job_and_click_apply(driver, job_link):
                     EC.element_to_be_clickable((By.CSS_SELECTOR, selector)))
                 driver.execute_script("arguments[0].scrollIntoView();", button)
                 driver.execute_script("arguments[0].click();", button)
-                print("Clicked 'Apply' button")
-                time.sleep(5)  # Increased wait time
+                logging.info("Clicked 'Apply' button")
+                time.sleep(5)
                 return True
             except TimeoutException:
                 continue
 
-        print("⚠ No 'Apply' button found, skipping.")
+        logging.warning("No 'Apply' button found, skipping.")
         return False
     except Exception as e:
-        print(f"Error: {str(e)}")
+        logging.error(f"Error opening job link: {str(e)}")
         return False
 
 def handle_radio_buttons(application_field, answer):
-    """Handle radio buttons within an application field."""
+    """Handle radio buttons with fuzzy matching and improved logging."""
     radio_buttons = application_field.find_elements(By.CSS_SELECTOR, "input[type='radio']")
     if radio_buttons:
         normalized_answer = normalize_text(answer)
         options = [normalize_text(radio.get_attribute("value")) for radio in radio_buttons]
-        print(f"Options found: {options}")
+        logging.info(f"Radio button options: {options}")
+
+        # Exact match first
         for radio in radio_buttons:
             value = normalize_text(radio.get_attribute("value"))
-            if value == normalized_answer or normalized_answer in value or value in normalized_answer:
+            if value == normalized_answer:
                 if not radio.is_selected():
                     driver.execute_script("arguments[0].click();", radio)
-                print(f"Selected radio button with value '{value}'")
+                logging.info(f"Selected radio button (exact match): '{value}'")
                 return True
-        print(f"No matching radio button found for answer '{answer}'")
+
+        # Fuzzy match as fallback
+        best_match = None
+        best_score = 0
+        for radio in radio_buttons:
+            value = normalize_text(radio.get_attribute("value"))
+            score = fuzz.ratio(value, normalized_answer)
+            logging.debug(f"Comparing '{value}' with '{normalized_answer}' - Score: {score}")
+            if score > 80 and score > best_score:
+                best_match = radio
+                best_score = score
+
+        if best_match:
+            if not best_match.is_selected():
+                driver.execute_script("arguments[0].click();", best_match)
+            logging.info(f"Selected radio button (fuzzy match): '{best_match.get_attribute('value')}' (Score: {best_score})")
+            return True
+
+        logging.warning(f"No matching radio button found for answer '{answer}' among options {options}")
         return False
-    print("No radio buttons found")
+    logging.info("No radio buttons found")
     return False
 
-def fill_form_and_submit(driver, answers):
-    """Fills required fields, answers questions, uploads resume, and submits."""
-    try:
-        print("\nFilling the form...")
 
+def handle_checkboxes(application_field, answer):
+    """Handle checkboxes with improved matching for acknowledgements."""
+    checkboxes = application_field.find_elements(By.CSS_SELECTOR, "input[type='checkbox']")
+    if checkboxes:
+        normalized_answer = normalize_text(answer)
+        options = [normalize_text(cb.get_attribute("value")) for cb in checkboxes]
+        logging.info(f"Checkbox options: {options}")
+
+        # Special case for "I acknowledge"
+        if "acknowledge" in normalized_answer:
+            for checkbox in checkboxes:
+                value = normalize_text(checkbox.get_attribute("value"))
+                if "acknowledge" in value:
+                    if not checkbox.is_selected():
+                        driver.execute_script("arguments[0].click();", checkbox)
+                    logging.info(f"Checked checkbox (acknowledgement match): '{value}'")
+                    return True
+
+        # Exact match
+        for checkbox in checkboxes:
+            value = normalize_text(checkbox.get_attribute("value"))
+            if value == normalized_answer:
+                if not checkbox.is_selected():
+                    driver.execute_script("arguments[0].click();", checkbox)
+                logging.info(f"Checked checkbox (exact match): '{value}'")
+                return True
+
+        # Fuzzy match
+        best_match = None
+        best_score = 0
+        for checkbox in checkboxes:
+            value = normalize_text(checkbox.get_attribute("value"))
+            score = fuzz.ratio(value, normalized_answer)
+            if score > 80 and score > best_score:
+                best_match = checkbox
+                best_score = score
+        if best_match:
+            if not best_match.is_selected():
+                driver.execute_script("arguments[0].click();", best_match)
+            logging.info(f"Checked checkbox (fuzzy match): '{best_match.get_attribute('value')}' (Score: {best_score})")
+            return True
+
+        logging.warning(f"No matching checkbox found for answer '{answer}' among options {options}")
+        return False
+    logging.info("No checkboxes found")
+    return False
+
+
+
+def fill_form_and_submit(driver, answers):
+    """Fills required fields, answers questions, uploads resume, waits 1 minute, and submits."""
+    try:
+        logging.info("Filling the form...")
+
+        filled_fields = set()
         for field, selectors in FIELD_SELECTORS.items():
             value = credentials.get(field)
-            if value:
-                input_field = find_input_field(driver, selectors)
-                if input_field:
+            if value and field not in filled_fields:
+                if input_field := find_input_field(driver, selectors):
                     driver.execute_script("arguments[0].scrollIntoView();", input_field)
                     input_field.clear()
                     if field == "resume":
-                        input_field.send_keys(credentials["resume"])
-                        print(f"Uploaded Resume: {credentials['resume']}")
+                        resume_path = credentials["resume"]
+                        logging.info(f"Attempting to upload resume from: {resume_path}")
+                        input_field.send_keys(resume_path)
+                        logging.info(f"Uploaded Resume: {resume_path}")
                     else:
                         input_field.send_keys(value)
-                        print(f"Filled {field.replace('_', ' ').title()}: {value}")
+                        logging.info(f"Filled {field.replace('_', ' ').title()}: {value}")
+                    filled_fields.add(field)
 
-      
         question_elements = driver.find_elements(By.CSS_SELECTOR, "li.application-question, li.application-question.custom-question")
-        
+        logging.info(f"Found {len(question_elements)} question elements")
         for question_element in question_elements:
             question_text = "Unknown question"
             try:
-                try:
-                    label_div = question_element.find_element(By.CSS_SELECTOR, "div.application-label")
-                    question_text = label_div.find_element(By.CSS_SELECTOR, "div.text").text
-                except NoSuchElementException:
-                    print(f"Skipping question element due to missing label or text")
-                    continue
+                label_div = question_element.find_element(By.CSS_SELECTOR, "div.application-label")
+                question_text = label_div.text.strip()
+            except NoSuchElementException:
+                question_text = question_element.text.strip() if question_element.text.strip() else "Unknown question"
+                logging.warning(f"No label div found, using element text: '{question_text}'")
 
-                normalized_question = normalize_text(question_text)
-                print(f"Found question: '{question_text}'")
+            normalized_question = normalize_text(question_text)
+            logging.info(f"Found question: '{question_text}'")
 
-               
-                best_match = None
-                for q in answers:
-                    if fuzz.ratio(normalized_question, normalize_text(q)) > 80:  
-                        best_match = q
-                        break
+            best_match = None
+            for q in answers:
+                q_normalized = normalize_text(q)
+                score = fuzz.ratio(normalized_question, q_normalized)
+                # Substring match for long questions like Acknowledgements
+                if ("acknowledge" in q_normalized and "acknowledge" in normalized_question) or score > 70:
+                    best_match = q
+                    logging.debug(f"Matched '{q}' with score: {score}")
+                    break
 
-                if best_match:
-                    answer = answers[best_match]
-                    print(f"Matched answer: '{answer}'")
+            if best_match:
+                answer = answers[best_match]
+                logging.info(f"Matched answer: '{answer}'")
 
-                   
-                    label_classes = label_div.get_attribute("class")
-                    application_field = question_element.find_element(By.CSS_SELECTOR, "div.application-field")
+                application_field = question_element.find_element(By.CSS_SELECTOR, "div.application-field")
+                is_required = "required" in application_field.get_attribute("class") or "✱" in question_text
 
-                  
-                    if application_field.find_elements(By.TAG_NAME, "textarea"):
-                        textarea = application_field.find_element(By.TAG_NAME, "textarea")
-                        textarea.clear()
-                        textarea.send_keys(answer)
-                        print(f"Filled text area with: '{answer}'")
+                if application_field.find_elements(By.TAG_NAME, "textarea"):
+                    textarea = application_field.find_element(By.TAG_NAME, "textarea")
+                    textarea.clear()
+                    textarea.send_keys(answer)
+                    logging.info(f"Filled text area with: '{answer}'")
 
-                    elif application_field.find_elements(By.TAG_NAME, "select"):
-                        select_element = application_field.find_element(By.TAG_NAME, "select")
+                elif application_field.find_elements(By.TAG_NAME, "select"):
+                    select_elements = application_field.find_elements(By.TAG_NAME, "select")
+                    logging.info(f"Found {len(select_elements)} dropdown(s) in this question")
+                    answer_parts = answer.split() if " " in answer else [answer]
+                    for idx, select_element in enumerate(select_elements):
                         select = Select(select_element)
                         options = [option.text for option in select.options]
-                        print(f"Dropdown options: {options}")
-                        normalized_answer = answer.strip()
-                        matched_option = next((opt for opt in options if opt.lower() == normalized_answer.lower()), None)
+                        logging.info(f"Dropdown {idx + 1} options: {options}")
+                        part_answer = answer_parts[min(idx, len(answer_parts) - 1)].strip()
+                        normalized_part_answer = part_answer.lower()
+                        matched_option = next((opt for opt in options if opt.lower() == normalized_part_answer), None)
                         if matched_option:
                             select.select_by_visible_text(matched_option)
-                            print(f"Selected dropdown option: '{matched_option}'")
+                            logging.info(f"Selected dropdown {idx + 1} option: '{matched_option}'")
                         else:
-                            print(f"Option '{answer}' not found in dropdown")
+                            best_match_option = None
+                            best_score = 0
+                            for opt in options:
+                                score = fuzz.ratio(opt.lower(), normalized_part_answer)
+                                if score > 50 and score > best_score:
+                                    best_match_option = opt
+                                    best_score = score
+                            if best_match_option:
+                                select.select_by_visible_text(best_match_option)
+                                logging.info(f"Selected dropdown {idx + 1} option (fuzzy match): '{best_match_option}' (Score: {best_score})")
+                            else:
+                                logging.warning(f"Option '{part_answer}' not found in dropdown {idx + 1}")
 
-                    elif application_field.find_elements(By.CSS_SELECTOR, "input[type='text'], input[type='email']"):
+                elif application_field.find_elements(By.CSS_SELECTOR, "input[type='text'], input[type='email']"):
+                    field_name = application_field.find_element(By.CSS_SELECTOR, "input").get_attribute("name")
+                    if field_name not in filled_fields or is_required:
                         text_input = application_field.find_element(By.CSS_SELECTOR, "input[type='text'], input[type='email']")
                         text_input.clear()
                         text_input.send_keys(answer)
-                        print(f"Filled text input with: '{answer}'")
+                        logging.info(f"Filled text input with: '{answer}'")
+                        filled_fields.add(field_name)
 
-                    elif application_field.find_elements(By.CSS_SELECTOR, "input[type='radio']"):
-                        handle_radio_buttons(application_field, answer)
+                elif application_field.find_elements(By.CSS_SELECTOR, "input[type='radio']"):
+                    handle_radio_buttons(application_field, answer)
 
-                    elif application_field.find_elements(By.CSS_SELECTOR, "input[type='checkbox']"):
-                        checkboxes = application_field.find_elements(By.CSS_SELECTOR, "input[type='checkbox']")
-                        normalized_answer = normalize_text(answer)
-                        for checkbox in checkboxes:
-                            value = normalize_text(checkbox.get_attribute("value"))
-                            if value == normalized_answer:
-                                driver.execute_script("arguments[0].click();", checkbox)
-                                print(f"Checked checkbox: '{answer}'")
-                                break
-
-                    else:
-                        print("Unknown question type")
+                elif application_field.find_elements(By.CSS_SELECTOR, "input[type='checkbox']"):
+                    handle_checkboxes(application_field, answer)
 
                 else:
-                    print(f"No matching answer found for '{question_text}'")
+                    logging.warning("Unknown question type")
 
-            except Exception as e:
-                print(f"Error processing question '{question_text}': {str(e)}")
+            else:
+                logging.warning(f"No matching answer found for '{question_text}'")
 
+        logging.info("Form filled. Waiting 1 minute for manual review before submission...")
+        time.sleep(60)
 
         submit_selectors = ["button#btn-submit", "button.postings-btn.template-btn-submit", "input[type='submit']"]
         for selector in submit_selectors:
@@ -319,35 +373,44 @@ def fill_form_and_submit(driver, answers):
                     EC.element_to_be_clickable((By.CSS_SELECTOR, selector)))
                 driver.execute_script("arguments[0].scrollIntoView();", submit_button)
                 submit_button.click()
-                print("Form submitted successfully")
+                logging.info("Form submitted successfully")
                 break
             except TimeoutException:
                 continue
+        else:
+            logging.warning("No submit button found.")
 
     except Exception as e:
-        print(f"Error filling form: {str(e)}")
-def process_job_application(driver, job_link, answers):
-    """Process a single job application with automation up to radio buttons."""
-    if open_job_and_click_apply(driver, job_link):
-        fill_form_and_submit(driver, answers)
-        send_email(job_link)  
-        return True
+        logging.error(f"Error filling form: {str(e)}")
+def process_job_application(driver, job_link, answers, max_retries=2):
+    """Process a single job application with retries."""
+    for attempt in range(max_retries + 1):
+        try:
+            if open_job_and_click_apply(driver, job_link):
+                fill_form_and_submit(driver, answers)
+                return True
+        except Exception as e:
+            logging.error(f"Attempt {attempt + 1} failed for {job_link}: {str(e)}")
+            if attempt < max_retries:
+                time.sleep(5)
+                driver.quit()
+                driver = uc.Chrome(options=chrome_options)
+                logging.info("Browser restarted for retry")
+            else:
+                logging.error(f"All retries exhausted for {job_link}")
     return False
-
 
 for job_link in job_links:
     try:
-        if open_job_and_click_apply(driver, job_link):
-            fill_form_and_submit(driver, answers)
-            time.sleep(2)
+        process_job_application(driver, job_link, answers)
+        time.sleep(2)
     except Exception as e:
-        print(f"Failed to process {job_link}: {str(e)}")
-        
+        logging.error(f"Failed to process {job_link}: {str(e)}")
         if "invalid session id" in str(e).lower():
+            logging.warning("Browser session crashed. Restarting...")
             driver.quit()
             driver = uc.Chrome(options=chrome_options)
-            print("Browser restarted due to session crash")
+            logging.info("Browser restarted due to session crash")
 
 driver.quit()
-print("\nJob application process completed!")
-
+logging.info("Job application process completed!")
