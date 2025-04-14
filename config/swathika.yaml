@@ -1,0 +1,75 @@
+
+# full_name: "swathika Kalyanasundaram"
+# first_name: "swathika"
+# last_name: "Kalyanasundaram"
+# email: "Swathika.kalyan0488@gmail.com"
+# phone: "(925) 579-1278"  
+# current_location: "pleasanton, CA, USA"
+# current_company: "WBL"  
+# linkedin: "https://www.linkedin.com/in/swathika-kalyanasundaram-2461a2346/"
+# resume_path: "resumes/Swathika.pdf"
+# resume: "resumes/Swathika.pdf"
+# work_auth: "Authorized to work for any employer"
+# # Linkedin Profile URL: "https://www.linkedin.com/in/srtnil-paaaoli"
+# # github: "https://github.com/your-github-username"  
+# # portfolio: "https://your-portfolio-url.com"  
+# # experience:
+# years: 0
+# domain: "Software Development"
+# education:
+# degree: "B.E/B.Tech in Computer Science and Engineering"
+# university: "Anna University"
+# graduation_year: 2023
+# compensation : "$100,000 - $120,000"
+# work_status : "H1 Visa"
+# work_authorization : "I am authorized to work in the country in which this job will be performed"
+# skills:
+#     - "Java"
+#     - "Python"
+#     - "C#"
+#     - "MySQL"
+#     - ".NET"
+#     - "Spring Boot"
+#     - "React.js"
+#     - "Docker"
+#     - "FastAPI"
+# certifications:
+#     - "Java Full Stack - JSpiders"
+#     - "Cyber Security Course"
+  
+
+
+first_name: "swathika"
+full_name: "swathika Kalyanasundaram"
+last_name: "Kalyanasundaram"
+email: "Swathika.kalyan0488@gmail.com"
+phone: "(925) 579-1278"
+resume_path: "resumes/Swathika.pdf"
+resume: "resumes/Swathika.pdf"
+linkedin: "https://www.linkedin.com/in/swathika-kalyanasundaram-2461a2346/"
+location: "pleasanton, CA, USA"
+school: "MIT"
+degree: "Bachelor's"
+work_auth: "Authorized to work for any employer"
+current_company: "N/A"
+current_location: "california pleasanton"
+
+
+
+#   first_name: "sindhuri"
+#   last_name: "Siddireddy "
+#   full_name: "Sindhuri Siddireddy"
+#   email: "sindhuri.siddireddy@gmail.com"
+#   phone: "203-824-1798"
+#   resume_path: "resumes/Sindhuri.pdf"  # Relative path
+#   linkedin: "https://www.linkedin.com/in/sindhurisiddireddy/"
+#   location: "pleasanton, CA, USA"
+#   school: "MIT"
+#   degree: "Bachelor's"
+#   current_location: "Pleasanton,CA"
+#   current_company: "Kisir"
+#   work_auth: "Authorized to work for any employer"
+
+
+
+
