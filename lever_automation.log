@@ -8137,3 +8137,167 @@ Stacktrace:
 	RtlInitializeExceptionChain [0x7764CE3B+107]
 	RtlGetAppContainerNamedObjectPath [0x7764CDC1+561]
 
+2025-04-15 21:36:07,154 - INFO - Selected profile: malathi.yaml
+2025-04-15 21:36:07,155 - INFO - ====== WebDriver manager ======
+2025-04-15 21:36:08,455 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-15 21:36:08,574 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-15 21:36:08,606 - INFO - Driver [C:\Users\hr\.wdm\drivers\chromedriver\win64\135.0.7049.84\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-15 21:36:09,624 - INFO - patching driver executable C:\Users\hr\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+2025-04-15 21:36:11,125 - INFO - Processing job: https://jobs.lever.co/zoox/1ff0f89b-77ec-4e86-927e-7098c377581f
+2025-04-15 21:36:11,128 - INFO - Opening job: https://jobs.lever.co/zoox/1ff0f89b-77ec-4e86-927e-7098c377581f
+2025-04-15 21:36:16,765 - INFO - Attempting css selector for apply button: a.postings-btn.template-btn-submit.hex-color
+2025-04-15 21:36:20,510 - INFO - Clicked 'Apply' button using css selector
+2025-04-15 21:36:23,512 - INFO - Attempting to upload resume: C:\Users\hr\OneDrive\Desktop\LeverAutomation\aka\lever\resumes/Malathi.pdf
+2025-04-15 21:36:23,512 - INFO - Trying selectors for resume_path: ['input#resume-upload-input', "input[type='file']", "//*[@id='application-form']/div[1]/ul/li[1]/label//input[@type='file']"]
+2025-04-15 21:36:23,512 - INFO - Attempting css selector: input#resume-upload-input
+2025-04-15 21:36:23,547 - INFO - Found resume input: <input class="application-file-input invisible-resume-upload" data-qa="input-resume" id="resume-upload-input" name="resume" tabindex="-1" type="file">
+2025-04-15 21:36:23,548 - INFO - Trying selectors for resume_upload_button: ['a.visible-resume-upload', 'button.upload-resume', "//*[@id='application-form']/div1]/ul/li[1]/label//a[contains(@class, 'visible-resume-upload')]"]
+2025-04-15 21:36:23,548 - INFO - Attempting css selector: a.visible-resume-upload
+2025-04-15 21:36:23,571 - INFO - Upload button found: <a href="#" class="postings-btn template-btn-utility visible-resume-upload"><svg class=" icon icon-paperclip" width="16" height="16" viewBox="0 0 16 16"><path id="Vector" d="M4 3.375C4 1.5125 5.5125 0 7.375 0C9.2375 0 10.75 1.5125 10.75 3.375V10.75C10.75 11.9937 9.74375 13 8.5 13C7.25625 13 6.25 11.9937 6.25 10.75V4.75C6.25 4.33437 6.58437 4 7 4C7.41563 4 7.75 4.33437 7.75 4.75V10.75C7.75 11.1656 8.08437 11.5 8.5 11.5C8.91563 11.5 9.25 11.1656 9.25 10.75V3.375C9.25 2.34063 8.40937 1.5 7.375 1.5C6.34063 1.5 5.5 2.34063 5.5 3.375V11.5C5.5 13.1562 6.84375 14.5 8.5 14.5C10.1562 14.5 11.5 13.1562 11.5 11.5V4.75C11.5 4.33437 11.8344 4 12.25 4C12.6656 4 13 4.33437 13 4.75V11.5C13 13.9844 10.9844 16 8.5 16C6.01562 16 4 13.9844 4 11.5V3.375Z"></path></svg><span class="filename"></span><span class="default-label">ATTACH RESUME/CV</span><input class="application-file-input invisible-resume-upload" data-qa="input-resume" id="resume-upload-input" name="resume" tabindex="-1" type="file"></a>
+2025-04-15 21:36:23,608 - INFO - Clicked resume upload button
+2025-04-15 21:36:24,619 - INFO - Made resume input visible
+2025-04-15 21:36:24,726 - INFO - Uploaded resume: C:\Users\hr\OneDrive\Desktop\LeverAutomation\aka\lever\resumes/Malathi.pdf
+2025-04-15 21:36:24,747 - INFO - Resume upload confirmed
+2025-04-15 21:36:26,750 - INFO - Attempting to fill full_name with: Malathi kaliappan
+2025-04-15 21:36:26,958 - INFO - Filled full_name: Malathi kaliappan
+2025-04-15 21:36:26,959 - INFO - Attempting to fill email with: malathi.kaliappan11@gmail.com 
+2025-04-15 21:36:27,212 - INFO - Filled email: malathi.kaliappan11@gmail.com 
+2025-04-15 21:36:27,212 - INFO - Attempting to fill phone with: 925-699-5473
+2025-04-15 21:36:37,465 - WARNING - Failed to fill phone with css selector input[type='tel']: Message: 
+Stacktrace:
+	GetHandleVerifier [0x00A980E3+60707]
+	GetHandleVerifier [0x00A98124+60772]
+	(No symbol) [0x008C0683]
+	(No symbol) [0x00908660]
+	(No symbol) [0x009089FB]
+	(No symbol) [0x00951022]
+	(No symbol) [0x0092D094]
+	(No symbol) [0x0094E824]
+	(No symbol) [0x0092CE46]
+	(No symbol) [0x008FC5D3]
+	(No symbol) [0x008FD424]
+	GetHandleVerifier [0x00CDBBC3+2435075]
+	GetHandleVerifier [0x00CD7163+2416035]
+	GetHandleVerifier [0x00CF350C+2531660]
+	GetHandleVerifier [0x00AAF1B5+155125]
+	GetHandleVerifier [0x00AB5B5D+182173]
+	GetHandleVerifier [0x00A9F9B8+91640]
+	GetHandleVerifier [0x00A9FB60+92064]
+	GetHandleVerifier [0x00A8A620+4704]
+	BaseThreadInitThunk [0x76C65D49+25]
+	RtlInitializeExceptionChain [0x7764CE3B+107]
+	RtlGetAppContainerNamedObjectPath [0x7764CDC1+561]
+
+2025-04-15 21:36:37,628 - INFO - Filled phone: 925-699-5473
+2025-04-15 21:36:37,628 - INFO - Attempting to fill current_company with: Pryon
+2025-04-15 21:36:37,745 - INFO - Filled current_company: Pryon
+2025-04-15 21:36:37,745 - INFO - Attempting to fill current_location with: San Francisco, CA, USA
+2025-04-15 21:36:37,894 - INFO - Filled current_location: San Francisco, CA, USA
+2025-04-15 21:36:37,895 - INFO - Attempting to fill linkedin with: https://www.linkedin.com/in/malathi-kaliappan/
+2025-04-15 21:36:38,048 - INFO - Filled linkedin: https://www.linkedin.com/in/malathi-kaliappan/
+2025-04-15 21:36:38,048 - WARNING - No value for github in credentials
+2025-04-15 21:36:38,048 - WARNING - No value for portfolio in credentials
+2025-04-15 21:36:38,048 - INFO - Trying selectors for LOCATION_SELECTORS.input: ["input[name='location']", "input[data-qa='location-input']", 'input.location-input']
+2025-04-15 21:36:38,048 - INFO - Attempting css selector: input[name='location']
+2025-04-15 21:36:38,205 - WARNING - Location dropdown handling failed: 'in <string>' requires string as left operand, not dict
+2025-04-15 21:36:38,206 - INFO - Trying selectors for QUESTION_SELECTORS: ['li.application-question', 'li.application-question.custom-question', 'div.application-question']
+2025-04-15 21:36:38,207 - INFO - Attempting css selector: li.application-question
+2025-04-15 21:36:38,226 - INFO - Found 9 question elements
+2025-04-15 21:36:38,252 - INFO - Processing question: Resume/CV
+✱
+2025-04-15 21:36:38,252 - INFO - Skipping resume question: Resume/CV
+✱
+2025-04-15 21:36:38,277 - INFO - Processing question: Full name
+✱
+2025-04-15 21:36:38,296 - INFO - No checkboxes found for question: Full name
+✱
+2025-04-15 21:36:38,296 - WARNING - No match found for question: Full name
+✱
+2025-04-15 21:36:38,318 - INFO - Processing question: Pronouns
+2025-04-15 21:36:38,411 - INFO - Checkboxes found for 'Pronouns': ['pronouns', 'pronouns', 'pronouns', 'pronouns', 'pronouns', 'pronouns', 'pronouns', 'pronouns', 'pronouns', 'pronouns', '']
+2025-04-15 21:36:38,546 - INFO - No relevant checkboxes checked for 'Pronouns'
+2025-04-15 21:36:38,546 - WARNING - No match found for question: Pronouns
+2025-04-15 21:36:38,567 - INFO - Processing question: Email
+✱
+2025-04-15 21:36:38,578 - INFO - No checkboxes found for question: Email
+✱
+2025-04-15 21:36:38,578 - WARNING - No match found for question: Email
+✱
+2025-04-15 21:36:38,607 - INFO - Processing question: Phone
+✱
+2025-04-15 21:36:38,618 - INFO - No checkboxes found for question: Phone
+✱
+2025-04-15 21:36:38,618 - WARNING - No match found for question: Phone
+✱
+2025-04-15 21:36:38,643 - INFO - Processing question: Current location
+2025-04-15 21:36:38,656 - INFO - No checkboxes found for question: Current location
+2025-04-15 21:36:38,658 - WARNING - No match found for question: Current location
+2025-04-15 21:36:38,682 - INFO - Processing question: Current company
+2025-04-15 21:36:38,693 - INFO - No checkboxes found for question: Current company
+2025-04-15 21:36:38,695 - WARNING - No match found for question: Current company
+2025-04-15 21:36:38,715 - INFO - Processing question: LinkedIn URL
+2025-04-15 21:36:38,726 - INFO - No checkboxes found for question: LinkedIn URL
+2025-04-15 21:36:38,726 - WARNING - No match found for question: LinkedIn URL
+2025-04-15 21:36:38,748 - INFO - Processing question: Other website
+2025-04-15 21:36:38,759 - INFO - No checkboxes found for question: Other website
+2025-04-15 21:36:38,760 - WARNING - No match found for question: Other website
+2025-04-15 21:36:38,772 - INFO - No acknowledgement checkbox found with css selector input[type='checkbox'][name*='acknowledge']
+2025-04-15 21:36:38,785 - INFO - No acknowledgement checkbox found with css selector input[type='checkbox'][name*='agree']
+2025-04-15 21:36:38,796 - INFO - No acknowledgement checkbox found with css selector input[type='checkbox'][name*='certify']
+2025-04-15 21:36:38,815 - INFO - No acknowledgement checkbox found with css selector input[type='checkbox'][required]
+2025-04-15 21:36:38,815 - INFO - Pausing for 3 minutes for manual review...
+2025-04-15 22:50:22,136 - INFO - Selected profile: configuration.yaml
+2025-04-15 22:50:22,209 - WARNING - Phone number format warning (continuing anyway): 
+2025-04-15 22:50:22,209 - ERROR - Resume file not found at: C:\Users\hr\OneDrive\Desktop\LeverAutomation\aka\lever\
+2025-04-15 23:14:40,786 - INFO - Selected profile: malathi.yaml
+2025-04-15 23:14:40,851 - INFO - ====== WebDriver manager ======
+2025-04-15 23:14:42,197 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-15 23:14:42,242 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-15 23:14:42,298 - INFO - Driver [C:\Users\hr\.wdm\drivers\chromedriver\win64\135.0.7049.84\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-15 23:14:43,214 - INFO - patching driver executable C:\Users\hr\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+2025-04-15 23:14:44,753 - INFO - Processing job: https://jobs.lever.co/zoox/1ff0f89b-77ec-4e86-927e-7098c377581f
+2025-04-15 23:14:44,753 - INFO - Opening job: https://jobs.lever.co/zoox/1ff0f89b-77ec-4e86-927e-7098c377581f
+2025-04-15 23:14:51,266 - INFO - Attempting css selector for apply button: a.postings-btn.template-btn-submit.hex-color
+2025-04-15 23:14:54,838 - INFO - Clicked 'Apply' button using css selector
+2025-04-15 23:14:57,849 - INFO - Attempting to upload resume: C:\Users\hr\OneDrive\Desktop\LeverAutomation\aka\lever\resumes/Malathi.pdf
+2025-04-15 23:14:57,851 - INFO - Trying selectors for resume_path: ['input#resume-upload-input', "input[type='file']", "//*[@id='application-form']/div[1]/ul/li[1]/label//input[@type='file']"]
+2025-04-15 23:14:57,851 - INFO - Attempting css selector: input#resume-upload-input
+2025-04-15 23:14:57,886 - INFO - Found resume input: <input class="application-file-input invisible-resume-upload" data-qa="input-resume" id="resume-upload-input" name="resume" tabindex="-1" type="file">
+2025-04-15 23:14:57,890 - INFO - Trying selectors for resume_upload_button: ['a.visible-resume-upload', 'button.upload-resume', "//*[@id='application-form']/div1]/ul/li[1]/label//a[contains(@class, 'visible-resume-upload')]"]
+2025-04-15 23:14:57,893 - INFO - Attempting css selector: a.visible-resume-upload
+2025-04-15 23:14:57,928 - INFO - Upload button found: <a href="#" class="postings-btn template-btn-utility visible-resume-upload"><svg class=" icon icon-paperclip" width="16" height="16" viewBox="0 0 16 16"><path id="Vector" d="M4 3.375C4 1.5125 5.5125 0 7.375 0C9.2375 0 10.75 1.5125 10.75 3.375V10.75C10.75 11.9937 9.74375 13 8.5 13C7.25625 13 6.25 11.9937 6.25 10.75V4.75C6.25 4.33437 6.58437 4 7 4C7.41563 4 7.75 4.33437 7.75 4.75V10.75C7.75 11.1656 8.08437 11.5 8.5 11.5C8.91563 11.5 9.25 11.1656 9.25 10.75V3.375C9.25 2.34063 8.40937 1.5 7.375 1.5C6.34063 1.5 5.5 2.34063 5.5 3.375V11.5C5.5 13.1562 6.84375 14.5 8.5 14.5C10.1562 14.5 11.5 13.1562 11.5 11.5V4.75C11.5 4.33437 11.8344 4 12.25 4C12.6656 4 13 4.33437 13 4.75V11.5C13 13.9844 10.9844 16 8.5 16C6.01562 16 4 13.9844 4 11.5V3.375Z"></path></svg><span class="filename"></span><span class="default-label">ATTACH RESUME/CV</span><input class="application-file-input invisible-resume-upload" data-qa="input-resume" id="resume-upload-input" name="resume" tabindex="-1" type="file"></a>
+2025-04-15 23:14:57,983 - INFO - Clicked resume upload button
+2025-04-15 23:14:59,012 - INFO - Made resume input visible
+2025-04-15 23:14:59,110 - INFO - Uploaded resume: C:\Users\hr\OneDrive\Desktop\LeverAutomation\aka\lever\resumes/Malathi.pdf
+2025-04-15 23:14:59,126 - INFO - Resume upload confirmed
+2025-04-15 23:15:01,140 - INFO - Attempting to fill full_name with: Malathi kaliappan
+2025-04-15 23:15:01,366 - INFO - Filled full_name: Malathi kaliappan
+2025-04-15 23:15:01,366 - INFO - Attempting to fill email with: malathi.kaliappan11@gmail.com 
+2025-04-15 23:15:01,508 - INFO - Filled email: malathi.kaliappan11@gmail.com 
+2025-04-15 23:15:01,508 - INFO - Attempting to fill phone with: 925-699-5473
+2025-04-15 23:15:02,598 - ERROR - Attempt 1 failed: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=135.0.7049.85)
+Stacktrace:
+	GetHandleVerifier [0x00FB80E3+60707]
+	GetHandleVerifier [0x00FB8124+60772]
+	(No symbol) [0x00DE0683]
+	(No symbol) [0x00DCFED0]
+	(No symbol) [0x00DEDD3F]
+	(No symbol) [0x00E53D7F]
+	(No symbol) [0x00E6E129]
+	(No symbol) [0x00E4CE46]
+	(No symbol) [0x00E1C5D3]
+	(No symbol) [0x00E1D424]
+	GetHandleVerifier [0x011FBBC3+2435075]
+	GetHandleVerifier [0x011F7163+2416035]
+	GetHandleVerifier [0x0121350C+2531660]
+	GetHandleVerifier [0x00FCF1B5+155125]
+	GetHandleVerifier [0x00FD5B5D+182173]
+	GetHandleVerifier [0x00FBF9B8+91640]
+	GetHandleVerifier [0x00FBFB60+92064]
+	GetHandleVerifier [0x00FAA620+4704]
+	BaseThreadInitThunk [0x76C65D49+25]
+	RtlInitializeExceptionChain [0x7764CE3B+107]
+	RtlGetAppContainerNamedObjectPath [0x7764CDC1+561]
+
