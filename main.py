@@ -23,41 +23,34 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from datetime import datetime
 
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('lever_automation.log', encoding='utf-8'),
-        logging.StreamHandler()
-    ]
-)
 
 class LeverAutomation:
     def __init__(self):
         self.lever_base_url = "https://jobs.lever.co"
-        self.profile_yaml = self.select_profile()
+        self.profile_yaml = self.select_profile()  # Ensure profile_yaml is set here
+        self.candidate_name = os.path.splitext(self.profile_yaml)[0]  # Extract candidate name
         self.load_locators()
-        self.credentials = self.load_config(f"config/{self.profile_yaml}")
-        self.answers = self.load_answers("answers.csv")
+        self.credentials = self.load_config(f"configuration/{self.profile_yaml}")
+        self.answers = self.load_answers("config/answers.csv")
         self.driver = self.setup_driver()
-        
+
     def select_profile(self):
-        """Dynamically list YAML files in config/"""
-        config_dir = "config"
+        """Dynamically list YAML files in configuration/"""
+        config_dir = "configuration"
         yaml_files = [
             f for f in os.listdir(config_dir)
             if os.path.isfile(os.path.join(config_dir, f)) and f.lower().endswith(('.yaml', '.yml'))
         ]
-        
+
         if not yaml_files:
-            logging.error("No YAML files found in config directory.")
-            raise FileNotFoundError("No YAML files found in config.")
+            logging.error("No YAML files found in configuration directory.")
+            raise FileNotFoundError("No YAML files found in configuration.")
 
         yaml_files.sort()
         print("Select a profile:")
         for idx, yaml_file in enumerate(yaml_files, 1):
             print(f"{idx} = {yaml_file}")
-        
+
         while True:
             try:
                 choice = input(f"Enter profile number (1-{len(yaml_files)}): ").strip()
@@ -65,11 +58,12 @@ class LeverAutomation:
                 if 1 <= profile_num <= len(yaml_files):
                     selected_yaml = yaml_files[profile_num - 1]
                     logging.info(f"Selected profile: {selected_yaml}")
-                    return selected_yaml
+                    return selected_yaml  
                 else:
                     print(f"Please enter a number between 1 and {len(yaml_files)}.")
             except ValueError:
                 print("Invalid input. Please enter a number.")
+
 
     def load_locators(self):
         try:
@@ -95,13 +89,12 @@ class LeverAutomation:
 
         required_fields = ["full_name", "email", "phone", "linkedin", "resume_path", "current_company", "current_location"]
         credentials = {}
-        
+
         for field in required_fields:
             if field not in data:
                 logging.error(f"Required field '{field}' missing in YAML.")
                 raise KeyError(f"Required field '{field}' missing in YAML.")
             credentials[field] = str(data[field])
-
 
         phone = credentials["phone"]
         cleaned_phone = re.sub(r'[^\d+]', '', phone)
@@ -138,15 +131,49 @@ class LeverAutomation:
         chrome_options = Options()
         chrome_options.add_argument("--disable-blink-features=AutomationControlled")
         chrome_options.add_argument("--start-maximized")
-        
+
         service = Service(ChromeDriverManager().install())
         driver = uc.Chrome(options=chrome_options, service=service)
         return driver
+
+    def save_session_state(self, job_link):
+        session_data = {
+            "current_url": self.driver.current_url,
+            "cookies": self.driver.get_cookies(),
+            "timestamp": datetime.now().isoformat()
+        }
+        with open(f"session_{job_link.split('/')[-1]}.json", "w") as f:
+            json.dump(session_data, f)
+
+    def load_session_state(self, job_link):
+        try:
+            with open(f"session_{job_link.split('/')[-1]}.json", "r") as f:
+                session_data = json.load(f)
+                self.driver.get(session_data["current_url"])
+                for cookie in session_data["cookies"]:
+                    self.driver.add_cookie(cookie)
+                self.driver.refresh()
+                return True
+        except FileNotFoundError:
+            return False
 
     def normalize_text(self, text):
         if not text:
             return ""
         return re.sub(r"[^a-zA-Z0-9\s]", "", text).strip().lower()
+
+    def validate_required_fields(self):
+        required_fields = ["full_name", "email", "phone", "resume"]
+        missing_fields = []
+
+        for field in required_fields:
+            if not self.credentials.get(field):
+                missing_fields.append(field)
+
+        if missing_fields:
+            logging.error(f"Missing required fields: {', '.join(missing_fields)}")
+            return False
+        return True
 
     def find_element(self, locator_key, sub_key=None, multiple=False, timeout=10):
         if sub_key:
@@ -156,12 +183,12 @@ class LeverAutomation:
         if not isinstance(selectors, list):
             selectors = [selectors]
         logging.info(f"Trying selectors for {locator_key}{'.' + sub_key if sub_key else ''}: {[s['value'] for s in selectors]}")
-        
+
         for selector in selectors:
             selector_type = selector.get('type', 'css')
             selector_value = selector.get('value', '')
             logging.info(f"Attempting {selector_type} selector: {selector_value}")
-            
+
             try:
                 by_type = By.CSS_SELECTOR if selector_type == 'css' else By.XPATH
                 if multiple:
@@ -232,7 +259,6 @@ class LeverAutomation:
             logging.error(f"Failed to upload resume: {str(e)}")
             return False
 
- 
         try:
             confirmation_selectors = [s['value'] for s in self.locators.get("resume_upload_confirmation", []) if s['type'] == 'css']
             if confirmation_selectors:
@@ -288,7 +314,6 @@ class LeverAutomation:
         return False
 
     def fill_basic_fields(self):
-        
         self.upload_resume()
 
         filled_fields = set()
@@ -396,7 +421,6 @@ class LeverAutomation:
                 logging.warning(f"Error interacting with radio button: {str(e)}")
                 continue
 
-    
         best_match = None
         best_score = 0
         for radio in radio_buttons:
@@ -474,7 +498,6 @@ class LeverAutomation:
 
         for question_element in question_elements:
             try:
-                
                 label = None
                 for selector in self.locators["QUESTION_FIELD_SELECTORS"]["label"]:
                     try:
@@ -494,7 +517,6 @@ class LeverAutomation:
                     logging.info(f"Skipping resume question: {question_text}")
                     continue
 
-                # Find matching answer
                 best_match = None
                 best_score = 0
                 for q in self.answers:
@@ -507,7 +529,6 @@ class LeverAutomation:
                     answer = self.answers[best_match]
                     logging.info(f"Matched '{question_text}' to '{best_match}' (Score: {best_score})")
 
-                    # Try textarea
                     for selector in self.locators["QUESTION_FIELD_SELECTORS"]["textarea"]:
                         try:
                             textarea = question_element.find_element(
@@ -522,7 +543,6 @@ class LeverAutomation:
                         except (NoSuchElementException, ElementNotInteractableException):
                             continue
 
-                    # Try text input
                     for selector in self.locators["QUESTION_FIELD_SELECTORS"]["text_input"]:
                         try:
                             text_input = question_element.find_element(
@@ -537,7 +557,6 @@ class LeverAutomation:
                         except (NoSuchElementException, ElementNotInteractableException):
                             continue
 
-                    # Try dropdown
                     for selector in self.locators["QUESTION_FIELD_SELECTORS"]["dropdown"]:
                         try:
                             select_element = question_element.find_element(
@@ -551,17 +570,14 @@ class LeverAutomation:
                         except (NoSuchElementException, ElementNotInteractableException):
                             continue
 
-                    # Try radio buttons
                     if self.handle_radio_buttons(question_element, answer, question_text):
                         continue
 
-                    # Try checkboxes
                     if self.handle_checkboxes(question_element, question_text):
                         continue
 
                     logging.warning(f"Could not answer question: {question_text}")
                 else:
-                    # Handle checkboxes for unmatched questions
                     if self.handle_checkboxes(question_element, question_text):
                         continue
                     logging.warning(f"No match found for question: {question_text}")
@@ -581,6 +597,36 @@ class LeverAutomation:
             except NoSuchElementException:
                 logging.info(f"No acknowledgement checkbox found with {selector_type} selector {selector_value}")
                 continue
+
+    def verify_submission(self, timeout=10):
+        try:
+            success_selectors = [
+                "div.post-apply-message",
+                "div.success-message",
+                "div.application-submitted"
+            ]
+            for selector in success_selectors:
+                try:
+                    if WebDriverWait(self.driver, timeout).until(
+                        EC.presence_of_element_located((By.CSS_SELECTOR, selector))
+                    ):
+                        return True
+                except TimeoutException:
+                    continue
+
+            success_url_patterns = [
+                "thanks",
+                "success",
+                "submitted"
+            ]
+            current_url = self.driver.current_url.lower()
+            if any(pattern in current_url for pattern in success_url_patterns):
+                return True
+
+            return False
+        except Exception as e:
+            logging.error(f"Submission verification failed: {str(e)}")
+            return False
 
     def submit_application(self):
         for selector in self.locators["SUBMIT_SELECTORS"]:
@@ -606,32 +652,29 @@ class LeverAutomation:
             try:
                 result = self.open_job_and_click_apply(job_link)
                 if result == "404":
-                    self.log_application_status(job_link, "Failed")
-                    return "failed"
+                    return "failed - 404 not found"
                 elif result == "already applied":
-                    self.log_application_status(job_link, "already applied")
                     return "already applied"
                 elif not result:
-                    self.log_application_status(job_link, "failed")
-                    return False
-                
+                    return "failed - could not apply"
+
+                if not self.validate_required_fields():
+                    return "failed - missing required fields"
+
                 self.fill_basic_fields()
                 self.handle_location_dropdown()
                 self.handle_custom_questions()
                 self.handle_acknowledgements()
 
-                # Pause for 3 minutes
-                logging.info("Pausing for 3 minutes for manual review...")
+                logging.info("Pausing for 1.5 minutes for manual review...")
                 time.sleep(90)
-                logging.info("Resuming after pause")
 
                 if self.submit_application():
-                    self.log_application_status(job_link, "success")
-                    return True
-                else:
-                    self.log_application_status(job_link, "failed")
-                    return False
-                
+                    if self.verify_submission():
+                        return "success"
+                    return "failed - submission verification failed"
+                return "failed - submission failed"
+
             except WebDriverException as e:
                 logging.error(f"Attempt {attempt + 1} failed: {e}")
                 if attempt < max_retries:
@@ -639,18 +682,16 @@ class LeverAutomation:
                     self.driver.quit()
                     self.driver = self.setup_driver()
                 else:
-                    logging.error("All retries exhausted")
-                    self.log_application_status(job_id, "failed")
-                    return False
+                    return "failed - max retries exceeded"
 
     def log_application_status(self, job_id, status):
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        log_file = "logs/application.csv"
-        
+        log_file = f"logs/job_application_{self.candidate_name}_{datetime.now().strftime('%Y-%m-%d')}.csv"
+
         try:
             os.makedirs("logs", exist_ok=True)
             file_exists = os.path.isfile(log_file)
-            
+
             with open(log_file, mode='a', newline='', encoding='utf-8') as f:
                 writer = csv.writer(f, quoting=csv.QUOTE_ALL)
                 if not file_exists:
@@ -661,14 +702,14 @@ class LeverAutomation:
         except Exception as e:
             logging.error(f"Failed to log to {log_file}: {e}")
 
-    def run(self, job_links_file="jobs/job_links.csv"):
+    def run(self, job_links_file="jobs/linkedin_jobs.csv"):
         if not os.path.exists(job_links_file):
             logging.error(f"CSV file '{job_links_file}' not found.")
             return
 
         job_links_df = pd.read_csv(job_links_file)
         required_columns = ["company", "platform", "job_id", "platform_link"]
-        
+
         if not all(col in job_links_df.columns for col in required_columns):
             logging.error("Missing required columns in CSV file.")
             return
@@ -684,7 +725,33 @@ class LeverAutomation:
 
         for job_link in job_links:
             logging.info(f"Processing job: {job_link}")
-            self.process_job_application(job_link)
+
+            if self.load_session_state(job_link):
+                logging.info("Resuming interrupted application")
+            else:
+                logging.info("Starting new application")
+
+            try:
+                status = self.process_job_application(job_link)
+                self.log_application_status(job_link, status)
+
+                if status == "success":
+                    logging.info("Application successful!")
+                    if os.path.exists(f"session_{job_link.split('/')[-1]}.json"):
+                        os.remove(f"session_{job_link.split('/')[-1]}.json")
+                elif status == "already applied":
+                    logging.info("Already applied to this position")
+                else:
+                    logging.warning(f"Application failed: {status}")
+
+            except KeyboardInterrupt:
+                logging.info("Application interrupted - saving state")
+                self.save_session_state(job_link)
+                return
+            except Exception as e:
+                logging.error(f"Unexpected error: {str(e)}")
+                self.log_application_status(job_link, f"failed - {str(e)}")
+                continue
 
         self.driver.quit()
         logging.info("Job application process completed!")
