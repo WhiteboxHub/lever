@@ -31,11 +31,6 @@
       {"type": "css", "value": "input[data-qa='org-input']"},
       {"type": "css", "value": "input[name='org']"}
     ],
-    "current_location": [
-      {"type": "css", "value": "input[name='location']"},
-      {"type": "css", "value": "input[data-qa='location-input']"},
-      {"type": "css", "value": "input.location-input"}
-    ],
     "linkedin": [
       {"type": "css", "value": "input[name='urls[LinkedIn]']"},
       {"type": "css", "value": "input[id*='linkedin']"}
@@ -105,8 +100,9 @@
       {"type": "css", "value": "input.location-input"}
     ],
     "options": [
-      {"type": "css", "value": "div.dropdown-results > div"},
-      {"type": "css", "value": "li[role='option']"}
+      {"type": "css", "value": "div.location-option"},
+      {"type": "css", "value": "li.select2-results__option"},
+      {"type": "xpath", "value": "//div[contains(@class, 'location-option')]"}
     ]
   },
   "ACKNOWLEDGEMENT_SELECTORS": [
