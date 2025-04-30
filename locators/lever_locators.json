@@ -1,0 +1,114 @@
+{
+  "resume_path": [
+    {"type": "css", "value": "input#resume-upload-input"},
+    {"type": "css", "value": "input[type='file']"},
+    {"type": "xpath", "value": "//*[@id='application-form']/div[1]/ul/li[1]/label//input[@type='file']"}
+  ],
+  "resume_upload_button": [
+    {"type": "css", "value": "a.visible-resume-upload"},
+    {"type": "css", "value": "button.upload-resume"},
+    {"type": "xpath", "value": "//*[@id='application-form']/div1]/ul/li[1]/label//a[contains(@class, 'visible-resume-upload')]"}
+  ],
+  "resume_upload_confirmation": [
+    {"type": "css", "value": "span.resume-upload-success"},
+    {"type": "css", "value": ".filename:not(:empty)"},
+    {"type": "xpath", "value": "//*[@id='application-form']/div[1]/ul/li[1]/label//span[contains(@class, 'resume-upload-success')]"}
+  ],
+  "FIELD_SELECTORS": {
+    "full_name": [
+      {"type": "css", "value": "input[name='name']"},
+      {"type": "css", "value": "input[id='name']"}
+    ],
+    "email": [
+      {"type": "css", "value": "input[type='email']"},
+      {"type": "css", "value": "input[name*='email']"}
+    ],
+    "phone": [
+      {"type": "css", "value": "input[type='tel']"},
+      {"type": "css", "value": "input[name*='phone']"}
+    ],
+    "current_company": [
+      {"type": "css", "value": "input[data-qa='org-input']"},
+      {"type": "css", "value": "input[name='org']"}
+    ],
+    "linkedin": [
+      {"type": "css", "value": "input[name='urls[LinkedIn]']"},
+      {"type": "css", "value": "input[id*='linkedin']"}
+    ],
+    "github": [
+      {"type": "css", "value": "input[name*='github']"}
+    ],
+    "portfolio": [
+      {"type": "css", "value": "input[name*='portfolio']"}
+    ]
+  },
+  "APPLY_SELECTORS": [
+    {"type": "css", "value": "a.postings-btn.template-btn-submit.hex-color"},
+    {"type": "css", "value": "a.postings-btn.template-btn-submit.cerulean"},
+    {"type": "css", "value": "a[href*='/apply']"},
+    {"type": "css", "value": "button[class*='apply']"},
+    {"type": "css", "value": "a[class*='apply']"}
+  ],
+  "SUBMIT_SELECTORS": [
+    {"type": "css", "value": "button#btn-submit"},
+    {"type": "css", "value": "button.postings-btn.template-btn-submit"},
+    {"type": "css", "value": "input[type='submit']"},
+    {"type": "css", "value": "button[type='submit']"}
+  ],
+  "QUESTION_SELECTORS": [
+    {"type": "css", "value": "li.application-question"},
+    {"type": "css", "value": "li.application-question.custom-question"},
+    {"type": "css", "value": "div.application-question"}
+  ],
+  "QUESTION_FIELD_SELECTORS": {
+    "label": [
+      {"type": "css", "value": "div.application-label"},
+      {"type": "css", "value": "label.application-label"}
+    ],
+    "field_container": [
+      {"type": "css", "value": "div.application-field"}
+    ],
+    "textarea": [
+      {"type": "css", "value": "textarea"}
+    ],
+    "text_input": [
+      {"type": "css", "value": "input[type='text']"},
+      {"type": "css", "value": "input[type='email']"}
+    ],
+    "dropdown": [
+      {"type": "css", "value": "select"}
+    ],
+    "dropdown_option": [
+      {"type": "css", "value": "option"}
+    ],
+    "radio_button": [
+      {"type": "css", "value": "input[type='radio']"}
+    ],
+    "checkbox": [
+      {"type": "css", "value": "input[type='checkbox']"}
+    ],
+    "required_indicator": [
+      {"type": "text", "value": "✱"},
+      {"type": "text", "value": "required"},
+      {"type": "text", "value": "*"}
+    ]
+  },
+  "LOCATION_SELECTORS": {
+    "input": [
+      {"type": "css", "value": "input[name='location']"},
+      {"type": "css", "value": "input[data-qa='location-input']"},
+      {"type": "css", "value": "input.location-input"}
+    ],
+    "options": [
+      {"type": "css", "value": "div.location-option"},
+      {"type": "css", "value": "li.select2-results__option"},
+      {"type": "xpath", "value": "//div[contains(@class, 'location-option')]"}
+    ]
+  },
+  "ACKNOWLEDGEMENT_SELECTORS": [
+    {"type": "css", "value": "input[type='checkbox'][name*='acknowledge']"},
+    {"type": "css", "value": "input[type='checkbox'][name*='agree']"},
+    {"type": "css", "value": "input[type='checkbox'][name*='certify']"},
+    {"type": "css", "value": "input[type='checkbox'][required]"}
+  ]
+}
