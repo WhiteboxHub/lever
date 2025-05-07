@@ -32,10 +32,11 @@
       {"type": "css", "value": "input[name='org']"}
     ],
     "linkedin": [
-      {"type": "css", "value": "input[name='urls[LinkedIn]']"},
-      {"type": "css", "value": "input[id*='linkedin']"}
+      {"type": "css", "value": "input[name='urls[Linkedin Profile]']"},
+      {"type": "css", "value": "input[name*='linkedin']"},
+      {"type": "css", "value": "input[type='text'][required][name*='profile']"}
     ],
-    "github": [
+      "github": [
       {"type": "css", "value": "input[name*='github']"}
     ],
     "portfolio": [
