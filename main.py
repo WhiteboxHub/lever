@@ -1,3 +1,5 @@
+
+
 import csv
 import os
 import time
@@ -27,15 +29,14 @@ from datetime import datetime
 class LeverAutomation:
     def __init__(self):
         self.lever_base_url = "https://jobs.lever.co"
-        self.profile_yaml = self.select_profile()  # Ensure profile_yaml is set here
-        self.candidate_name = os.path.splitext(self.profile_yaml)[0]  # Extract candidate name
+        self.profile_yaml = self.select_profile()
+        self.candidate_name = os.path.splitext(self.profile_yaml)[0]
         self.load_locators()
         self.credentials = self.load_config(f"configuration/{self.profile_yaml}")
         self.answers = self.load_answers("config/answers.csv")
         self.driver = self.setup_driver()
 
     def select_profile(self):
-        """Dynamically list YAML files in configuration/"""
         config_dir = "configuration"
         yaml_files = [
             f for f in os.listdir(config_dir)
@@ -58,12 +59,11 @@ class LeverAutomation:
                 if 1 <= profile_num <= len(yaml_files):
                     selected_yaml = yaml_files[profile_num - 1]
                     logging.info(f"Selected profile: {selected_yaml}")
-                    return selected_yaml  
+                    return selected_yaml
                 else:
                     print(f"Please enter a number between 1 and {len(yaml_files)}.")
             except ValueError:
                 print("Invalid input. Please enter a number.")
-
 
     def load_locators(self):
         try:
@@ -163,7 +163,7 @@ class LeverAutomation:
         return re.sub(r"[^a-zA-Z0-9\s]", "", text).strip().lower()
 
     def validate_required_fields(self):
-        required_fields = ["full_name", "email", "phone", "resume"]
+        required_fields = ["full_name", "email", "phone", "linkedin", "resume"]
         missing_fields = []
 
         for field in required_fields:
@@ -171,9 +171,129 @@ class LeverAutomation:
                 missing_fields.append(field)
 
         if missing_fields:
-            logging.error(f"Missing required fields: {', '.join(missing_fields)}")
+            logging.error(f"Missing required fields in credentials: {', '.join(missing_fields)}")
             return False
         return True
+
+    def check_required_fields_filled(self):
+        """
+        Check all required fields in the form (marked with * or required attribute).
+        Returns True if all required fields are filled, False otherwise.
+        """
+        try:
+            # Collect all required fields (text inputs, textareas, dropdowns, checkboxes)
+            required_fields = []
+
+            # Text inputs and textareas
+            for selector in (
+                self.locators["FIELD_SELECTORS"].get("full_name", []) +
+                self.locators["FIELD_SELECTORS"].get("email", []) +
+                self.locators["FIELD_SELECTORS"].get("phone", []) +
+                self.locators["FIELD_SELECTORS"].get("linkedin", []) +
+                self.locators["QUESTION_FIELD_SELECTORS"].get("text_input", []) +
+                self.locators["QUESTION_FIELD_SELECTORS"].get("textarea", [])
+            ):
+                selector_type = selector.get('type', 'css')
+                selector_value = selector.get('value', '')
+                try:
+                    by_type = By.CSS_SELECTOR if selector_type == 'css' else By.XPATH
+                    elements = self.driver.find_elements(by_type, selector_value)
+                    for element in elements:
+                        # Check if field is required (has required attribute or * indicator)
+                        is_required = (
+                            element.get_attribute("required") is not None or
+                            any(
+                                self.driver.find_elements(
+                                    By.XPATH,
+                                    f".//ancestor::*[contains(., '{indicator}')]"
+                                )
+                                for indicator in self.locators["QUESTION_FIELD_SELECTORS"]["required_indicator"]
+                            )
+                        )
+                        if is_required:
+                            required_fields.append({"element": element, "type": "text"})
+                except Exception as e:
+                    logging.warning(f"Error checking selector {selector_value}: {str(e)}")
+
+            # Dropdowns
+            for selector in self.locators["QUESTION_FIELD_SELECTORS"].get("dropdown", []):
+                selector_type = selector.get('type', 'css')
+                selector_value = selector.get('value', '')
+                try:
+                    by_type = By.CSS_SELECTOR if selector_type == 'css' else By.XPATH
+                    elements = self.driver.find_elements(by_type, selector_value)
+                    for element in elements:
+                        is_required = (
+                            element.get_attribute("required") is not None or
+                            any(
+                                self.driver.find_elements(
+                                    By.XPATH,
+                                    f".//ancestor::*[contains(., '{indicator}')]"
+                                )
+                                for indicator in self.locators["QUESTION_FIELD_SELECTORS"]["required_indicator"]
+                            )
+                        )
+                        if is_required:
+                            required_fields.append({"element": element, "type": "dropdown"})
+                except Exception as e:
+                    logging.warning(f"Error checking dropdown selector {selector_value}: {str(e)}")
+
+            # Checkboxes (group by question)
+            checkbox_groups = {}
+            for selector in self.locators["QUESTION_FIELD_SELECTORS"].get("checkbox", []):
+                selector_type = selector.get('type', 'css')
+                selector_value = selector.get('value', '')
+                try:
+                    by_type = By.CSS_SELECTOR if selector_type == 'css' else By.XPATH
+                    checkboxes = self.driver.find_elements(by_type, selector_value)
+                    for checkbox in checkboxes:
+                        # Find the parent question element
+                        parent_question = checkbox.find_element(
+                            By.XPATH, "./ancestor::li[contains(@class, 'application-question') or contains(@class, 'question')]"
+                        )
+                        question_text = parent_question.text.strip() or "Unknown question"
+                        is_required = any(
+                            indicator in question_text
+                            for indicator in self.locators["QUESTION_FIELD_SELECTORS"]["required_indicator"]
+                        )
+                        if is_required:
+                            if question_text not in checkbox_groups:
+                                checkbox_groups[question_text] = []
+                            checkbox_groups[question_text].append(checkbox)
+                except Exception as e:
+                    logging.warning(f"Error checking checkbox selector {selector_value}: {str(e)}")
+
+            # Verify all required fields
+            for field in required_fields:
+                element = field["element"]
+                field_type = field["type"]
+                try:
+                    if field_type in ["text", "textarea"]:
+                        value = element.get_attribute("value")
+                        if not value or value.strip() == "":
+                            logging.warning(f"Required {field_type} field is empty: {element.get_attribute('name') or element.get_attribute('id')}")
+                            return False
+                    elif field_type == "dropdown":
+                        select = Select(element)
+                        if not select.first_selected_option or select.first_selected_option.text.strip() == "":
+                            logging.warning(f"Required dropdown field is not selected: {element.get_attribute('name') or element.get_attribute('id')}")
+                            return False
+                except Exception as e:
+                    logging.warning(f"Error checking {field_type} field: {str(e)}")
+                    return False
+
+            # Verify checkbox groups
+            for question_text, checkboxes in checkbox_groups.items():
+                if not any(cb.is_selected() for cb in checkboxes):
+                    logging.warning(f"Required checkbox group '{question_text}' has no selections")
+                    return False
+
+            logging.info("All required fields are filled")
+            return True
+
+        except Exception as e:
+            logging.error(f"Error checking required fields: {str(e)}")
+            return False
 
     def find_element(self, locator_key, sub_key=None, multiple=False, timeout=10):
         if sub_key:
@@ -466,27 +586,63 @@ class LeverAutomation:
         normalized_question = self.normalize_text(question_text)
         logging.info(f"Checkboxes found for '{question_text}': {[cb.get_attribute('name') or cb.text for cb in checkboxes]}")
 
+        is_required = any(indicator in question_text for indicator in self.locators["QUESTION_FIELD_SELECTORS"]["required_indicator"])
+
         for checkbox in checkboxes:
             try:
-                if any(keyword in normalized_question for keyword in ["certify", "agree", "acknowledge", "confirm"]):
-                    if not checkbox.is_selected():
-                        self.driver.execute_script("arguments[0].scrollIntoView(true);", checkbox)
-                        self.driver.execute_script("arguments[0].click();", checkbox)
-                        logging.info(f"Checked checkbox for '{question_text}'")
-                    return True
+                label = None
+                try:
+                    label_element = checkbox.find_element(
+                        By.XPATH, "./following-sibling::label | ./preceding-sibling::label | ./parent::label"
+                    )
+                    label = label_element.text.strip()
+                except NoSuchElementException:
+                    label = checkbox.get_attribute("name") or checkbox.get_attribute("value") or ""
+
+                if not label:
+                    logging.info(f"Skipping checkbox with no label for question: {question_text}")
+                    continue
+
+                normalized_label = self.normalize_text(label)
+                logging.info(f"Evaluating checkbox with label: '{label}' (required: {is_required})")
+
+                if "linkedin" in normalized_question or "linkedin" in normalized_label:
+                    if self.credentials["linkedin"]:
+                        if not checkbox.is_selected():
+                            self.driver.execute_script("arguments[0].scrollIntoView(true);", checkbox)
+                            self.driver.execute_script("arguments[0].click();", checkbox)
+                            logging.info(f"Checked LinkedIn checkbox for '{question_text}' with label '{label}'")
+                        return True
+                    else:
+                        logging.info(f"Skipping LinkedIn checkbox for '{question_text}' (no LinkedIn URL provided)")
+                        continue
+
+                best_match = None
+                best_score = 0
+                for answer_key, answer_value in self.answers.items():
+                    score = fuzz.ratio(self.normalize_text(answer_key), normalized_label)
+                    if score > best_score:
+                        best_match = answer_key
+                        best_score = score
+
+                if best_match and best_score > 90:
+                    normalized_answer = self.normalize_text(self.answers[best_match])
+                    if normalized_answer in ["yes", "true", "agree", "accept", "confirm"]:
+                        if not checkbox.is_selected():
+                            self.driver.execute_script("arguments[0].scrollIntoView(true);", checkbox)
+                            self.driver.execute_script("arguments[0].click();", checkbox)
+                            logging.info(f"Checked checkbox for '{question_text}' with label '{label}' (fuzzy match, score: {best_score})")
+                        return True
+                    else:
+                        logging.info(f"Skipping checkbox for '{question_text}' with label '{label}' (answer: {self.answers[best_match]})")
+                else:
+                    if is_required:
+                        logging.warning(f"Required checkbox for '{question_text}' with label '{label}' not matched (best score: {best_score})")
+                    else:
+                        logging.info(f"No matching answer for checkbox with label '{label}' (best score: {best_score})")
+
             except (ElementNotInteractableException, StaleElementReferenceException) as e:
-                logging.warning(f"Failed to interact with checkbox: {str(e)}")
-                continue
-        for checkbox in checkboxes:
-            try:
-                if checkbox.get_attribute("required") or "required" in (checkbox.get_attribute("class") or "").lower():
-                    if not checkbox.is_selected():
-                        self.driver.execute_script("arguments[0].scrollIntoView(true);", checkbox)
-                        self.driver.execute_script("arguments[0].click();", checkbox)
-                        logging.info(f"Checked required checkbox for '{question_text}'")
-                    return True
-            except (ElementNotInteractableException, StaleElementReferenceException) as e:
-                logging.warning(f"Failed to check required checkbox: {str(e)}")
+                logging.warning(f"Failed to interact with checkbox for '{question_text}': {str(e)}")
                 continue
 
         logging.info(f"No relevant checkboxes checked for '{question_text}'")
@@ -588,15 +744,30 @@ class LeverAutomation:
         for selector in self.locators["ACKNOWLEDGEMENT_SELECTORS"]:
             selector_type = selector.get('type', 'css')
             selector_value = selector.get('value', '')
+            if "required" in selector_value:
+                logging.info(f"Skipping required acknowledgement checkbox to avoid overlap: {selector_value}")
+                continue
             try:
                 by_type = By.CSS_SELECTOR if selector_type == 'css' else By.XPATH
                 checkbox = self.driver.find_element(by_type, selector_value)
+                label = None
+                try:
+                    label_element = checkbox.find_element(
+                        By.XPATH, "./following-sibling::label | ./preceding-sibling::label | ./parent::label"
+                    )
+                    label = label_element.text.strip()
+                except NoSuchElementException:
+                    label = checkbox.get_attribute("name") or checkbox.get_attribute("value") or "No label"
+
                 if not checkbox.is_selected():
+                    self.driver.execute_script("arguments[0].scrollIntoView(true);", checkbox)
                     self.driver.execute_script("arguments[0].click();", checkbox)
-                    logging.info(f"Checked acknowledgement checkbox with {selector_type} selector {selector_value}")
+                    logging.info(f"Checked acknowledgement checkbox with label '{label}' using {selector_type} selector {selector_value}")
             except NoSuchElementException:
                 logging.info(f"No acknowledgement checkbox found with {selector_type} selector {selector_value}")
                 continue
+            except Exception as e:
+                logging.warning(f"Error handling acknowledgement checkbox with {selector_type} selector {selector_value}: {str(e)}")
 
     def verify_submission(self, timeout=10):
         try:
@@ -659,7 +830,7 @@ class LeverAutomation:
                     return "failed - could not apply"
 
                 if not self.validate_required_fields():
-                    return "failed - missing required fields"
+                    return "failed - missing required fields in credentials"
 
                 self.fill_basic_fields()
                 self.handle_location_dropdown()
@@ -668,6 +839,22 @@ class LeverAutomation:
 
                 logging.info("Pausing for 1.5 minutes for manual review...")
                 time.sleep(90)
+
+                # Check required fields periodically until filled or timeout
+                max_wait_time = 600  # 10 minutes
+                wait_interval = 30   # Check every 30 seconds
+                elapsed_time = 0
+                while elapsed_time < max_wait_time:
+                    if self.check_required_fields_filled():
+                        logging.info("All required fields filled, proceeding to submit")
+                        break
+                    logging.info("Some required fields not filled. Waiting 30 seconds for user input...")
+                    time.sleep(wait_interval)
+                    elapsed_time += wait_interval
+
+                if elapsed_time >= max_wait_time and not self.check_required_fields_filled():
+                    logging.error("Timeout: Not all required fields filled within maximum wait time")
+                    return "failed - required fields not filled"
 
                 if self.submit_application():
                     if self.verify_submission():
@@ -744,9 +931,14 @@ class LeverAutomation:
                 else:
                     logging.warning(f"Application failed: {status}")
 
+                self.driver.delete_all_cookies()
+                self.driver.get("about:blank")
+                logging.info("Browser reset for next job application.")
+
             except KeyboardInterrupt:
                 logging.info("Application interrupted - saving state")
                 self.save_session_state(job_link)
+                self.driver.quit()
                 return
             except Exception as e:
                 logging.error(f"Unexpected error: {str(e)}")
